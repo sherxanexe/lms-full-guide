@@ -625,6 +625,36 @@
             gap: 1rem;
             justify-content: center;
         }
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: linear-gradient(135deg, #1976d2, #42a5f5);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-family: inherit;
+}
+
+.scroll-to-top:hover {
+    background: linear-gradient(135deg, #1565c0, #1976d2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+}
+
+.scroll-to-top:active {
+    transform: translateY(0);
+}
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -666,6 +696,12 @@
                 right: auto;
                 left: 0;
             }
+.scroll-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+    }
         }
     </style>
 </head>
@@ -1919,7 +1955,27 @@
                     </ul>
                 </div>
             </div>
+<div style="background: rgba(33, 150, 243, 0.1); border-left: 4px solid #2196f3; padding: 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+        📚 Дополнительные ресурсы
+    </h3>
+    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+        Для более детального руководства по настройке уведомлений, включая продвинутые возможности и примеры использования, посетите:
+    </p>
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="https://sherxanexe.github.io/notif-full-guide" 
+           target="_blank" 
+           style="display: inline-block; background: linear-gradient(135deg, #1976d2, #42a5f5); color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3); transition: all 0.3s ease;">
+            🔗 Полный гайд по уведомлениям
+        </a>
+    </div>
+</div>
 
+<!-- Кнопка "Наверх" - добавить в самый конец body, перед закрывающим тегом -->
+<button id="scroll-to-top" class="scroll-to-top" onclick="scrollToTop()" style="display: none;">
+    <span style="font-size: 1.2rem;">↑</span>
+    <span style="font-size: 0.9rem; margin-top: 0.2rem;">Наверх</span>
+</button>
             <!-- Контактная информация -->
             <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
                 <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с настройкой уведомлений?</h3>
@@ -2553,7 +2609,23 @@
                 }
             });
         });
+// Показать/скрыть кнопку "Наверх"
+window.addEventListener('scroll', function() {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    if (window.pageYOffset > 300) {
+        scrollToTopBtn.style.display = 'flex';
+    } else {
+        scrollToTopBtn.style.display = 'none';
+    }
+});
 
+// Функция плавной прокрутки наверх
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
         // Handle window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
