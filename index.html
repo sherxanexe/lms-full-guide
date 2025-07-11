@@ -2619,6 +2619,16 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Показать/скрыть кнопку "Наверх" - работает на всех страницах
+window.addEventListener('scroll', function() {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    if (window.pageYOffset > 300) {
+        scrollToTopBtn.style.display = 'flex';
+    } else {
+        scrollToTopBtn.style.display = 'none';
+    }
+});
+
 // Функция плавной прокрутки наверх
 function scrollToTop() {
     window.scrollTo({
@@ -2626,16 +2636,11 @@ function scrollToTop() {
         behavior: 'smooth'
     });
 }
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                closeSidebar();
-            }
-            if (tourActive) {
-                showTourStep();
-            }
-        });
     </script>
+<button id="scroll-to-top" class="scroll-to-top" onclick="scrollToTop()" style="display: none;">
+    <span style="font-size: 1.2rem;">↑</span>
+    <span style="font-size: 0.9rem; margin-top: 0.2rem;">Наверх</span>
+</button>
 </body>
 </html>
 
