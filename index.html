@@ -541,18 +541,46 @@
             font-size: 1.2rem;
         }
 
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            background: linear-gradient(135deg, #1976d2, #1565c0);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-bottom: 2rem;
-        }
+        .back-button-fixed {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1976d2;
+    border: 2px solid #1976d2;
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 999;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+        .back-button-fixed:hover {
+    background: #1976d2;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3);
+}
+
+.back-button-fixed:active {
+    transform: translateY(0);
+}
+
+.back-button-fixed .icon {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.back-button-fixed .back-text {
+    font-size: 0.9rem;
+}
 
         .back-button:hover {
             transform: translateY(-2px);
@@ -658,6 +686,23 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+.back-button-fixed {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+    }
+    
+    .back-button-fixed .back-text {
+        display: none; /* Скрыть текст на мобильных, оставить только стрелку */
+    }
+    
+    .back-button-fixed {
+        width: 45px;
+        height: 45px;
+        justify-content: center;
+        padding: 0;
+    }
             .main-content {
                 padding: 1rem;
             }
@@ -703,6 +748,9 @@
         height: 50px;
     }
         }
+.guide-page .back-button {
+    display: none !important;
+}
     </style>
 </head>
 <body>
@@ -2305,7 +2353,65 @@
         let currentTourStep = 0;
         let tourActive = false;
         let viewedGuides = JSON.parse(localStorage.getItem('viewedGuides')) || [];
+function updateBackButton() {
+    const backButton = document.getElementById('back-button');
+    const homePageVisible = document.getElementById('home-page').style.display !== 'none';
+    
+    if (homePageVisible) {
+        backButton.style.display = 'none';
+    } else {
+        backButton.style.display = 'flex';
+    }
+}
 
+// Обновить существующие функции показа страниц
+function showHome() {
+    // Скрыть все страницы гайдов
+    const guidePages = document.querySelectorAll('.guide-page');
+    guidePages.forEach(page => {
+        page.style.display = 'none';
+    });
+    
+    // Показать главную страницу
+    document.getElementById('home-page').style.display = 'block';
+    
+    // Обновить кнопку "Назад"
+    updateBackButton();
+    
+    // Закрыть боковое меню на мобильных
+    closeSidebar();
+}
+
+function showGuide(guideId) {
+    // Скрыть главную страницу
+    document.getElementById('home-page').style.display = 'none';
+    
+    // Скрыть все страницы гайдов
+    const guidePages = document.querySelectorAll('.guide-page');
+    guidePages.forEach(page => {
+        page.style.display = 'none';
+    });
+    
+    // Показать нужную страницу гайда
+    const targetPage = document.getElementById(guideId + '-page');
+    if (targetPage) {
+        targetPage.style.display = 'block';
+    }
+    
+    // Обновить кнопку "Назад"
+    updateBackButton();
+    
+    // Закрыть боковое меню на мобильных
+    closeSidebar();
+    
+    // Прокрутить наверх
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Вызвать функцию при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    updateBackButton();
+});
         // Translation function
         function t(key) {
             return translations[currentLanguage]?.[key] || translations['ru'][key] || key;
