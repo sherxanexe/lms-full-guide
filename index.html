@@ -2353,13 +2353,17 @@
         let currentTourStep = 0;
         let tourActive = false;
         let viewedGuides = JSON.parse(localStorage.getItem('viewedGuides')) || [];
+// Исправленная функция показа/скрытия кнопки "Назад"
 function updateBackButton() {
     const backButton = document.getElementById('back-button');
-    const homePageVisible = document.getElementById('home-page').style.display !== 'none';
+    const homePage = document.getElementById('home-page');
     
-    if (homePageVisible) {
+    // Проверяем, находимся ли мы на главной странице
+    if (homePage && homePage.style.display !== 'none') {
+        // На главной странице - скрываем кнопку
         backButton.style.display = 'none';
     } else {
+        // На странице гайда - показываем кнопку
         backButton.style.display = 'flex';
     }
 }
@@ -2370,32 +2374,65 @@ function showHome() {
     const guidePages = document.querySelectorAll('.guide-page');
     guidePages.forEach(page => {
         page.style.display = 'none';
+        page.classList.remove('active');
     });
     
     // Показать главную страницу
-    document.getElementById('home-page').style.display = 'block';
+    const homePage = document.getElementById('home-page');
+    homePage.style.display = 'block';
+    
+    // Обновить активный пункт меню
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    const homeMenuItem = document.querySelector('.menu-item[onclick="showHome()"]');
+    if (homeMenuItem) {
+        homeMenuItem.classList.add('active');
+    }
     
     // Обновить кнопку "Назад"
     updateBackButton();
     
     // Закрыть боковое меню на мобильных
     closeSidebar();
+    
+    // Прокрутить наверх
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showGuide(guideId) {
+    // Отметить гайд как просмотренный
+    if (!viewedGuides.includes(guideId)) {
+        viewedGuides.push(guideId);
+        localStorage.setItem('viewedGuides', JSON.stringify(viewedGuides));
+        updateGuideStatus();
+    }
+
     // Скрыть главную страницу
-    document.getElementById('home-page').style.display = 'none';
+    const homePage = document.getElementById('home-page');
+    homePage.style.display = 'none';
     
     // Скрыть все страницы гайдов
     const guidePages = document.querySelectorAll('.guide-page');
     guidePages.forEach(page => {
         page.style.display = 'none';
+        page.classList.remove('active');
     });
     
     // Показать нужную страницу гайда
     const targetPage = document.getElementById(guideId + '-page');
     if (targetPage) {
         targetPage.style.display = 'block';
+        targetPage.classList.add('active');
+    }
+    
+    // Обновить активный пункт меню
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    const menuItem = document.querySelector(`.menu-item[onclick="showGuide('${guideId}')"]`);
+    if (menuItem) {
+        menuItem.classList.add('active');
     }
     
     // Обновить кнопку "Назад"
@@ -2410,7 +2447,18 @@ function showGuide(guideId) {
 
 // Вызвать функцию при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация других функций...
     updateBackButton();
+});
+
+// Показать/скрыть кнопку "Наверх"
+window.addEventListener('scroll', function() {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    if (window.pageYOffset > 300) {
+        scrollToTopBtn.style.display = 'flex';
+    } else {
+        scrollToTopBtn.style.display = 'none';
+    }
 });
         // Translation function
         function t(key) {
@@ -2743,7 +2791,7 @@ function scrollToTop() {
     <span style="font-size: 1.2rem;">↑</span>
     <span style="font-size: 0.9rem; margin-top: 0.2rem;">Наверх</span>
 </button>
-<button id="back-button" class="back-button-fixed" onclick="showHome()" style="display: none;">
+<button id="back-button" class="back-button-fixed" onclick="showHome()">
     <span class="icon">←</span>
     <span class="back-text">Назад</span>
 </button>
