@@ -473,6 +473,82 @@
             margin-bottom: 10px;
         }
 
+        /* Новые стили для изображений */
+        .screenshot-container {
+            margin: 30px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+        }
+
+        .screenshot-placeholder {
+            background: #ffffff;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 60px 20px;
+            margin: 15px 0;
+            color: #667eea;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-placeholder:hover {
+            background: #f8f9fa;
+            border-color: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .screenshot-placeholder::before {
+            content: "📸";
+            font-size: 2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .screenshot-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .screenshot-description {
+            color: #6c757d;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .screenshot-filename {
+            background: #667eea;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-family: 'Monaco', 'Menlo', monospace;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .screenshot-small {
+            padding: 40px 15px;
+        }
+
+        .screenshot-small::before {
+            font-size: 1.5em;
+        }
+
+        .screenshot-wide {
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -525,6 +601,14 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .screenshot-container {
+                padding: 15px;
+            }
+
+            .screenshot-placeholder {
+                padding: 40px 15px;
+            }
         }
     </style>
 </head>
@@ -565,6 +649,15 @@
                 </ul>
             </div>
 
+            <div class="screenshot-container">
+                <div class="screenshot-title">Общий вид админ-панели Docebo</div>
+                <div class="screenshot-description">Главная страница административной панели с основными разделами управления</div>
+                <div class="screenshot-placeholder">
+                    Скриншот главной страницы Admin Menu
+                </div>
+                <div class="screenshot-filename">admin-menu-main.png</div>
+            </div>
+
             <h2 style="color: #667eea; margin-bottom: 30px; font-size: 2em;">🎯 Выберите способ зачисления</h2>
 
             <div class="method-selector">
@@ -595,6 +688,24 @@
                     </div>
                 </div>
 
+                <div class="screenshot-container">
+                    <div class="screenshot-title">Раздел E-learning в Admin Menu</div>
+                    <div class="screenshot-description">Показывает расположение раздела E-learning и подразделов в админ-меню</div>
+                    <div class="screenshot-placeholder">
+                        Скриншот меню Admin Menu → E-learning
+                    </div>
+                    <div class="screenshot-filename">admin-menu-elearning.png</div>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-title">Страница Course Management</div>
+                    <div class="screenshot-description">Основная страница управления курсами со списком всех курсов</div>
+                    <div class="screenshot-placeholder screenshot-wide">
+                        Скриншот страницы Course Management с полным списком курсов
+                    </div>
+                    <div class="screenshot-filename">course-management-main.png</div>
+                </div>
+
                 <div class="options-grid">
                     <div class="option-card">
                         <span class="option-icon">📖</span>
@@ -606,6 +717,24 @@
                         <div class="option-title">Несколько курсов</div>
                         <div class="option-description">Выберите чекбоксы курсов → <span class="code">Choose action</span> → <span class="code">Enroll users</span></div>
                     </div>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-title">Manage Enrollments для одного курса</div>
+                    <div class="screenshot-description">Интерфейс управления зачислениями при нажатии на название курса</div>
+                    <div class="screenshot-placeholder">
+                        Скриншот меню Manage Enrollments для отдельного курса
+                    </div>
+                    <div class="screenshot-filename">course-manage-enrollments.png</div>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-title">Массовое зачисление нескольких курсов</div>
+                    <div class="screenshot-description">Выбор нескольких курсов и меню Choose action</div>
+                    <div class="screenshot-placeholder">
+                        Скриншот выбора курсов чекбоксами и меню Choose action
+                    </div>
+                    <div class="screenshot-filename">course-multiple-selection.png</div>
                 </div>
 
                 <div class="process-flow">
@@ -646,6 +775,33 @@
                                 <li><strong>Группы пользователей</strong> - выберите из вкладки Groups</li>
                             </ul>
                             
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Шаг Users - Выбор пользователей</div>
+                                <div class="screenshot-description">Интерфейс выбора пользователей со вкладками Users, Branches, Groups</div>
+                                <div class="screenshot-placeholder screenshot-wide">
+                                    Скриншот страницы выбора пользователей с тремя вкладками
+                                </div>
+                                <div class="screenshot-filename">enrollment-step1-users.png</div>
+                            </div>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Вкладка Branches</div>
+                                <div class="screenshot-description">Выбор целых отделов для зачисления</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот вкладки Branches с иерархией отделов
+                                </div>
+                                <div class="screenshot-filename">enrollment-branches-tab.png</div>
+                            </div>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Вкладка Groups</div>
+                                <div class="screenshot-description">Выбор групп пользователей для зачисления</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот вкладки Groups со списком групп
+                                </div>
+                                <div class="screenshot-filename">enrollment-groups-tab.png</div>
+                            </div>
+                            
                             <div class="warning">
                                 <h4>⚠️ Важно о Branches</h4>
                                 <p>При выборе parent branch пользователи из дочерних branches НЕ будут зачислены автоматически. Нужно выбирать каждый sub-branch отдельно. Root branch выбрать нельзя.</p>
@@ -658,6 +814,15 @@
                         <div class="step-title">Шаг Additional Information - Настройка параметров</div>
                         <div class="step-content">
                             <p>Настройте параметры зачисления:</p>
+                            
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Шаг Additional Information</div>
+                                <div class="screenshot-description">Настройка ролей, периода действия и дополнительных параметров</div>
+                                <div class="screenshot-placeholder screenshot-wide">
+                                    Скриншот страницы Additional Information с настройками
+                                </div>
+                                <div class="screenshot-filename">enrollment-step2-additional-info.png</div>
+                            </div>
                             
                             <h4 style="color: #667eea; margin: 15px 0 10px 0;">🎭 Роли в курсе</h4>
                             <div class="options-grid">
@@ -678,11 +843,38 @@
                                 </div>
                             </div>
 
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Выбор ролей пользователей</div>
+                                <div class="screenshot-description">Интерфейс выбора роли (Learner, Tutor, Instructor)</div>
+                                <div class="screenshot-placeholder screenshot-small">
+                                    Скриншот dropdown меню выбора ролей
+                                </div>
+                                <div class="screenshot-filename">enrollment-roles-selection.png</div>
+                            </div>
+
                             <h4 style="color: #667eea; margin: 15px 0 10px 0;">📅 Период действия Enrollment</h4>
                             <p>Опционально можно установить период, в течение которого пользователь будет иметь доступ к курсу. После окончания срока курс останется видимым, но недоступным для прохождения.</p>
 
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Настройка периода действия</div>
+                                <div class="screenshot-description">Выбор даты начала и окончания доступа к курсу</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот настройки дат периода действия enrollment
+                                </div>
+                                <div class="screenshot-filename">enrollment-validity-period.png</div>
+                            </div>
+
                             <h4 style="color: #667eea; margin: 15px 0 10px 0;">🔧 Дополнительные поля</h4>
                             <p>Если курс имеет <span class="code">enrollment additional fields</span>, их необходимо заполнить. Все обязательные поля должны быть заполнены для продолжения.</p>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Дополнительные поля зачисления</div>
+                                <div class="screenshot-description">Пример дополнительных полей, которые нужно заполнить при зачислении</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот дополнительных полей enrollment
+                                </div>
+                                <div class="screenshot-filename">enrollment-additional-fields.png</div>
+                            </div>
 
                             <div class="tip">
                                 <h4>💡 Enrollment Attributes</h4>
@@ -694,6 +886,15 @@
                                     <li><span class="badge">Optional</span> - опциональный</li>
                                 </ul>
                             </div>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Enrollment Attributes</div>
+                                <div class="screenshot-description">Настройка приоритета курса (Mandatory, Required, Recommended, Optional)</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот настройки enrollment attributes
+                                </div>
+                                <div class="screenshot-filename">enrollment-attributes.png</div>
+                            </div>
                         </div>
                     </div>
 
@@ -702,6 +903,15 @@
                         <div class="step-title">Шаг Notifications - Настройка уведомлений</div>
                         <div class="step-content">
                             <p>Этот шаг появляется только если в <span class="code">Admin menu > Advanced settings > Advanced options</span> включена опция <span class="code">Send immediate notification digest on massive enrollment action</span>.</p>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Шаг Notifications</div>
+                                <div class="screenshot-description">Настройка уведомлений для пользователей и менеджеров</div>
+                                <div class="screenshot-placeholder screenshot-wide">
+                                    Скриншот страницы настройки уведомлений
+                                </div>
+                                <div class="screenshot-filename">enrollment-step3-notifications.png</div>
+                            </div>
 
                             <div class="options-grid">
                                 <div class="option-card">
@@ -714,6 +924,24 @@
                                     <div class="option-title">Для менеджеров</div>
                                     <div class="option-description">Отправляет отдельное уведомление для каждого пользователя</div>
                                 </div>
+                            </div>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Выбор уведомлений для пользователей</div>
+                                <div class="screenshot-description">Список доступных уведомлений для отправки пользователям</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот списка уведомлений для пользователей
+                                </div>
+                                <div class="screenshot-filename">enrollment-notifications-users.png</div>
+                            </div>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Выбор уведомлений для менеджеров</div>
+                                <div class="screenshot-description">Список доступных уведомлений для отправки менеджерам</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот списка уведомлений для менеджеров
+                                </div>
+                                <div class="screenshot-filename">enrollment-notifications-managers.png</div>
                             </div>
 
                             <div class="warning">
@@ -729,9 +957,27 @@
                         <div class="step-content">
                             <p>Нажмите <span class="code">Confirm</span> для завершения процесса зачисления.</p>
                             
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Шаг Confirm</div>
+                                <div class="screenshot-description">Финальное подтверждение зачисления с кнопкой Confirm</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот страницы подтверждения с кнопкой Confirm
+                                </div>
+                                <div class="screenshot-filename">enrollment-step4-confirm.png</div>
+                            </div>
+                            
                             <div class="success">
                                 <h4>✅ Background Job</h4>
                                 <p>Если количество зачислений превышает 20, запускается фоновая задача. Помните: <strong>одно зачисление = один пользователь + один курс</strong>. Например, 3 курса × 2 пользователя = 6 зачислений.</p>
+                            </div>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Успешное завершение зачисления</div>
+                                <div class="screenshot-description">Сообщение об успешном завершении процесса зачисления</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот сообщения об успешном зачислении
+                                </div>
+                                <div class="screenshot-filename">enrollment-success-message.png</div>
                             </div>
                         </div>
                     </div>
@@ -755,6 +1001,24 @@
                         <div class="path-arrow">→</div>
                         <div class="path-step">Enroll users</div>
                     </div>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-title">Раздел Users в E-learning</div>
+                    <div class="screenshot-description">Страница управления пользователями в разделе E-learning</div>
+                    <div class="screenshot-placeholder screenshot-wide">
+                        Скриншот страницы Users в Admin Menu → E-learning
+                    </div>
+                    <div class="screenshot-filename">user-management-main.png</div>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-title">Меню Related sections</div>
+                    <div class="screenshot-description">Меню с тремя точками (⋯) и пункт "Enroll users"</div>
+                    <div class="screenshot-placeholder">
+                        Скриншот меню Related sections с пунктом Enroll users
+                    </div>
+                    <div class="screenshot-filename">user-management-related-sections.png</div>
                 </div>
 
                 <div class="process-flow">
@@ -794,6 +1058,15 @@
                                 <li>Группы пользователей</li>
                                 <li>Branches (отделы)</li>
                             </ul>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Выбор пользователей в User Management</div>
+                                <div class="screenshot-description">Интерфейс выбора пользователей с чекбоксами</div>
+                                <div class="screenshot-placeholder screenshot-wide">
+                                    Скриншот выбора пользователей в User Management
+                                </div>
+                                <div class="screenshot-filename">user-management-select-users.png</div>
+                            </div>
                         </div>
                     </div>
 
@@ -806,6 +1079,15 @@
                                 <li>Поставьте галочки напротив нужных курсов</li>
                                 <li>Используйте кнопку <span class="code">Select all</span> для выбора всех курсов на всех страницах</li>
                             </ul>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Выбор курсов для зачисления</div>
+                                <div class="screenshot-description">Страница выбора курсов с чекбоксами и кнопкой Select all</div>
+                                <div class="screenshot-placeholder screenshot-wide">
+                                    Скриншот страницы выбора курсов в User Management
+                                </div>
+                                <div class="screenshot-filename">user-management-select-courses.png</div>
+                            </div>
                         </div>
                     </div>
 
@@ -820,6 +1102,15 @@
                                 <li>Приоритет курса (если доступно)</li>
                                 <li>Дополнительные поля</li>
                             </ul>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Настройка параметров в User Management</div>
+                                <div class="screenshot-description">Страница Additional Information в процессе зачисления из User Management</div>
+                                <div class="screenshot-placeholder screenshot-wide">
+                                    Скриншот настройки параметров в User Management
+                                </div>
+                                <div class="screenshot-filename">user-management-additional-info.png</div>
+                            </div>
                         </div>
                     </div>
 
@@ -832,6 +1123,15 @@
                                 <h4>💡 Для Power Users</h4>
                                 <p>Power Users видят только те уведомления, для которых у них есть разрешения и назначения ресурсов.</p>
                             </div>
+
+                            <div class="screenshot-container">
+                                <div class="screenshot-title">Уведомления в User Management</div>
+                                <div class="screenshot-description">Настройка уведомлений при зачислении через User Management</div>
+                                <div class="screenshot-placeholder">
+                                    Скриншот настройки уведомлений в User Management
+                                </div>
+                                <div class="screenshot-filename">user-management-notifications.png</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -839,6 +1139,16 @@
 
             <div class="comparison-table" style="margin-top: 40px;">
                 <h3 style="color: #667eea; margin-bottom: 20px;">📊 Сравнение методов зачисления</h3>
+                
+                <div class="screenshot-container">
+                    <div class="screenshot-title">Сравнение интерфейсов</div>
+                    <div class="screenshot-description">Визуальное сравнение интерфейсов Course Management и User Management</div>
+                    <div class="screenshot-placeholder screenshot-wide">
+                        Скриншот сравнения двух интерфейсов side-by-side
+                    </div>
+                    <div class="screenshot-filename">comparison-interfaces.png</div>
+                </div>
+
                 <table class="comparison-table">
                     <thead>
                         <tr>
@@ -899,6 +1209,15 @@
                     <h4>📊 Отчеты</h4>
                     <p>В отчете <span class="code">Course summary report</span> будут отображаться только пользователи, зачисленные как <span class="badge">Learner</span>.</p>
                 </div>
+            </div>
+
+            <div class="screenshot-container">
+                <div class="screenshot-title">Результат успешного зачисления</div>
+                <div class="screenshot-description">Итоговый вид зачисленных пользователей в Course Management</div>
+                <div class="screenshot-placeholder screenshot-wide">
+                    Скриншот списка зачисленных пользователей в курсе
+                </div>
+                <div class="screenshot-filename">enrollment-final-result.png</div>
             </div>
 
             <div class="warning">
