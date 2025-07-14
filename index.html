@@ -2271,358 +2271,226 @@
             }
         };
 
-        // Language flags mapping
-        const languageFlags = {
-            'ru': '🇷🇺',
-            'en': '🇺🇸',
-            'kk': '🇰🇿'
-        };
-
-        const languageCodes = {
-            'ru': 'RU',
-            'en': 'EN',
-            'kk': 'KK'
-        };
-
-        // Current language
-        let currentLanguage = localStorage.getItem('selectedLanguage') || 'ru';
-
-        // Tour data with translations
-        const tourSteps = [
-            {
-                element: 'menu-toggle',
-                titleKey: 'tour.menuNavigation.title',
-                descriptionKey: 'tour.menuNavigation.description',
-                position: 'bottom',
-                action: 'openSidebar'
-            },
-            {
-                element: 'sidebar-menu',
-                titleKey: 'tour.guidesList.title',
-                descriptionKey: 'tour.guidesList.description',
-                position: 'right'
-            },
-            {
-                element: 'guides-grid',
-                titleKey: 'tour.guidesGrid.title',
-                descriptionKey: 'tour.guidesGrid.description',
-                position: 'top',
-                action: 'closeSidebar'
-            }
-        ];
-
+        <script>
+        // Переменные для управления состоянием
+        let currentLanguage = 'ru';
         let currentTourStep = 0;
-        let tourActive = false;
-        let viewedGuides = JSON.parse(localStorage.getItem('viewedGuides')) || [];
+        let tourSteps = [];
 
-        // Translation function
-        function t(key) {
-            return translations[currentLanguage]?.[key] || translations['ru'][key] || key;
-        }
-
-        // Update all translations on page
-        function updatePageTranslations() {
-            // Update elements with data-translate attribute
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                element.textContent = t(key);
-            });
-
-            // Update elements with data-translate-title attribute
-            document.querySelectorAll('[data-translate-title]').forEach(element => {
-                const key = element.getAttribute('data-translate-title');
-                element.setAttribute('title', t(key));
-            });
-
-            // Update document title
-            document.title = t('site.title') + ' - Руководства и инструкции';
-
-            // Update html lang attribute
-            document.documentElement.lang = currentLanguage;
-
-            // Update tour next button text
-            const tourNextBtn = document.getElementById('tour-next');
-            if (tourNextBtn && currentTourStep === tourSteps.length - 1) {
-                tourNextBtn.textContent = t('tour.finish');
-            }
-        }
-
-        // Language selector functions
-        function toggleLanguageDropdown() {
-            const dropdown = document.getElementById('language-dropdown');
-            const toggle = document.getElementById('language-toggle');
-            dropdown.classList.toggle('active');
-            toggle.classList.toggle('active');
-        }
-
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem('selectedLanguage', lang);
+        // Функция для показа гайда
+        function showGuide(guideId) {
+            // Скрываем главную страницу
+            document.getElementById('home-page').style.display = 'none';
             
-            // Update current language display
-            document.getElementById('current-flag').textContent = languageFlags[lang];
-            document.getElementById('current-lang').textContent = languageCodes[lang];
-            
-            // Update dropdown selection
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.classList.remove('selected');
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('selected');
-                }
+            // Скрываем все гайды
+            const allGuides = document.querySelectorAll('.guide-page');
+            allGuides.forEach(guide => {
+                guide.style.display = 'none';
+                guide.classList.remove('active');
             });
             
-            // Close dropdown
-            document.getElementById('language-dropdown').classList.remove('active');
-            document.getElementById('language-toggle').classList.remove('active');
+            // Показываем нужный гайд
+            const targetGuide = document.getElementById(guideId + '-page');
+            if (targetGuide) {
+                targetGuide.style.display = 'block';
+                targetGuide.classList.add('active');
+            }
             
-            // Update all translations
-            updatePageTranslations();
+            // Обновляем активное состояние в меню
+            updateActiveMenuItem(guideId);
             
-            // Update guide status
-            updateGuideStatus();
-        }
-
-        // Close language dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            const languageSelector = document.querySelector('.language-selector');
-            if (!languageSelector.contains(e.target)) {
-                document.getElementById('language-dropdown').classList.remove('active');
-                document.getElementById('language-toggle').classList.remove('active');
-            }
-        });
-
-        // Update guide status icons
-        function updateGuideStatus() {
-            document.querySelectorAll('.guide-card').forEach(card => {
-                const guideId = card.getAttribute('data-guide');
-                const statusIcon = card.querySelector('.guide-status');
-                
-                if (viewedGuides.includes(guideId)) {
-                    statusIcon.classList.remove('new');
-                    statusIcon.classList.add('viewed');
-                    statusIcon.textContent = '✓';
-                    statusIcon.title = t('status.viewed');
-                } else {
-                    statusIcon.classList.remove('viewed');
-                    statusIcon.classList.add('new');
-                    statusIcon.textContent = '●';
-                    statusIcon.title = t('status.new');
-                }
-            });
-        }
-
-        // Check if user has seen the tour
-        function checkFirstVisit() {
-            const hasSeenTour = localStorage.getItem('hasSeenTour');
-            if (!hasSeenTour) {
-                setTimeout(() => {
-                    document.getElementById('welcome-overlay').style.display = 'block';
-                }, 1000);
-            }
-        }
-
-        function startTour() {
-            localStorage.setItem('hasSeenTour', 'true');
-            document.getElementById('welcome-overlay').style.display = 'none';
-            document.getElementById('tour-overlay').classList.add('active');
-            tourActive = true;
-            currentTourStep = 0;
-            showTourStep();
-        }
-
-        function skipTour() {
-            localStorage.setItem('hasSeenTour', 'true');
-            document.getElementById('welcome-overlay').style.display = 'none';
-        }
-
-        function showTourStep() {
-            if (currentTourStep >= tourSteps.length) {
-                endTour();
-                return;
-            }
-
-            const step = tourSteps[currentTourStep];
-            
-            // Execute step action before showing
-            if (step.action === 'openSidebar') {
-                toggleSidebar();
-            } else if (step.action === 'closeSidebar') {
-                closeSidebar();
-            }
-
-            // Wait a bit for animation to complete
-            setTimeout(() => {
-                const element = document.getElementById(step.element);
-                const highlight = document.getElementById('tour-highlight');
-                const dialog = document.getElementById('tour-dialog');
-
-                if (!element) {
-                    nextTourStep();
-                    return;
-                }
-
-                // Position highlight
-                const rect = element.getBoundingClientRect();
-                highlight.style.left = (rect.left - 5) + 'px';
-                highlight.style.top = (rect.top - 5) + 'px';
-                highlight.style.width = (rect.width + 10) + 'px';
-                highlight.style.height = (rect.height + 10) + 'px';
-
-                // Position dialog
-                let dialogTop, dialogLeft;
-                if (step.position === 'bottom') {
-                    dialogTop = rect.bottom + 20;
-                    dialogLeft = rect.left;
-                } else if (step.position === 'right') {
-                    dialogTop = rect.top;
-                    dialogLeft = rect.right + 20;
-                } else {
-                    dialogTop = rect.top - 180;
-                    dialogLeft = rect.left;
-                }
-
-                // Ensure dialog stays within viewport
-                if (dialogLeft + 300 > window.innerWidth) {
-                    dialogLeft = window.innerWidth - 320;
-                }
-                if (dialogLeft < 20) {
-                    dialogLeft = 20;
-                }
-                if (dialogTop < 20) {
-                    dialogTop = rect.bottom + 20;
-                }
-
-                dialog.style.left = dialogLeft + 'px';
-                dialog.style.top = dialogTop + 'px';
-
-                // Update dialog content with translations
-                document.getElementById('tour-title').textContent = t(step.titleKey);
-                document.getElementById('tour-description').textContent = t(step.descriptionKey);
-                document.getElementById('tour-progress').textContent = `${currentTourStep + 1} из ${tourSteps.length}`;
-
-                // Update buttons
-                document.getElementById('tour-prev').style.display = currentTourStep === 0 ? 'none' : 'inline-block';
-                const nextBtn = document.getElementById('tour-next');
-                nextBtn.textContent = currentTourStep === tourSteps.length - 1 ? t('tour.finish') : t('tour.next');
-            }, step.action ? 300 : 0);
-        }
-
-        function nextTourStep() {
-            currentTourStep++;
-            showTourStep();
-        }
-
-        function prevTourStep() {
-            if (currentTourStep > 0) {
-                currentTourStep--;
-                showTourStep();
-            }
-        }
-
-        function endTour() {
-            document.getElementById('tour-overlay').classList.remove('active');
+            // Закрываем боковое меню
             closeSidebar();
-            tourActive = false;
         }
 
-        // Existing functions
+        // Функция для показа главной страницы
+        function showHome() {
+            // Скрываем все гайды
+            const allGuides = document.querySelectorAll('.guide-page');
+            allGuides.forEach(guide => {
+                guide.style.display = 'none';
+                guide.classList.remove('active');
+            });
+            
+            // Показываем главную страницу
+            document.getElementById('home-page').style.display = 'block';
+            
+            // Обновляем активное состояние в меню
+            updateActiveMenuItem('home');
+            
+            // Закрываем боковое меню
+            closeSidebar();
+        }
+
+        // Функция для обновления активного пункта меню
+        function updateActiveMenuItem(activeId) {
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Находим и активируем соответствующий пункт меню
+            if (activeId === 'home') {
+                const homeItem = document.querySelector('.menu-item[onclick="showHome()"]');
+                if (homeItem) homeItem.classList.add('active');
+            } else {
+                const activeItem = document.querySelector(`[onclick*="${activeId}"]`);
+                if (activeItem && activeItem.classList.contains('menu-item')) {
+                    activeItem.classList.add('active');
+                }
+            }
+        }
+
+        // Функция для переключения боковой панели
         function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
+            const sidebar = document.getElementById('sidebar');
             const overlay = document.querySelector('.overlay');
-            const menuToggle = document.querySelector('.menu-toggle');
+            const menuToggle = document.getElementById('menu-toggle');
             
             sidebar.classList.toggle('open');
             overlay.classList.toggle('active');
             menuToggle.classList.toggle('active');
         }
 
+        // Функция для закрытия боковой панели
         function closeSidebar() {
-            const sidebar = document.querySelector('.sidebar');
+            const sidebar = document.getElementById('sidebar');
             const overlay = document.querySelector('.overlay');
-            const menuToggle = document.querySelector('.menu-toggle');
+            const menuToggle = document.getElementById('menu-toggle');
             
             sidebar.classList.remove('open');
             overlay.classList.remove('active');
             menuToggle.classList.remove('active');
         }
 
-        function showHome() {
-            document.querySelectorAll('.guide-page').forEach(page => {
-                page.classList.remove('active');
-            });
+        // Функция для переключения языкового меню
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            const toggle = document.getElementById('language-toggle');
             
-            document.getElementById('home-page').style.display = 'block';
-            
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('.menu-item[onclick="showHome()"]').classList.add('active');
-            
-            closeSidebar();
+            dropdown.classList.toggle('active');
+            toggle.classList.toggle('active');
         }
 
-        function showGuide(guideId) {
-            // Mark guide as viewed
-            if (!viewedGuides.includes(guideId)) {
-                viewedGuides.push(guideId);
-                localStorage.setItem('viewedGuides', JSON.stringify(viewedGuides));
-                updateGuideStatus();
-            }
-
-            document.getElementById('home-page').style.display = 'none';
+        // Функция для смены языка
+        function changeLanguage(lang) {
+            currentLanguage = lang;
             
-            document.querySelectorAll('.guide-page').forEach(page => {
-                page.classList.remove('active');
-            });
+            // Обновляем флаг и код языка
+            const flags = {
+                'ru': '🇷🇺',
+                'en': '🇺🇸',
+                'kk': '🇰🇿'
+            };
             
-            const guidePage = document.getElementById(guideId + '-page');
-            if (guidePage) {
-                guidePage.classList.add('active');
-            }
+            const codes = {
+                'ru': 'RU',
+                'en': 'EN',
+                'kk': 'KK'
+            };
             
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            const menuItem = document.querySelector(`.menu-item[onclick="showGuide('${guideId}')"]`);
-            if (menuItem) {
-                menuItem.classList.add('active');
-            }
+            document.getElementById('current-flag').textContent = flags[lang];
+            document.getElementById('current-lang').textContent = codes[lang];
             
-            closeSidebar();
-        }
-
-        // Close tour on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && tourActive) {
-                endTour();
-            }
-        });
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set initial language
-            changeLanguage(currentLanguage);
-            updateGuideStatus();
-            checkFirstVisit();
-        });
-
-        // Close sidebar when clicking on a menu item on mobile
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    closeSidebar();
+            // Обновляем активное состояние в выпадающем меню
+            const options = document.querySelectorAll('.language-option');
+            options.forEach(option => {
+                option.classList.remove('selected');
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('selected');
                 }
             });
+            
+            // Закрываем выпадающее меню
+            toggleLanguageDropdown();
+        }
+
+        // Функции для тура
+        function startTour() {
+            document.getElementById('welcome-overlay').style.display = 'none';
+        }
+
+        function skipTour() {
+            document.getElementById('welcome-overlay').style.display = 'none';
+        }
+
+        function nextTourStep() {
+            // Логика для следующего шага тура
+        }
+
+        function prevTourStep() {
+            // Логика для предыдущего шага тура
+        }
+
+        // Функция для скролла наверх
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Закрытие языкового меню при клике вне его
+        document.addEventListener('click', function(event) {
+            const languageSelector = document.querySelector('.language-selector');
+            const dropdown = document.getElementById('language-dropdown');
+            const toggle = document.getElementById('language-toggle');
+            
+            if (!languageSelector.contains(event.target)) {
+                dropdown.classList.remove('active');
+                toggle.classList.remove('active');
+            }
         });
 
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                closeSidebar();
-            }
-            if (tourActive) {
-                showTourStep();
-            }
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Показываем главную страницу по умолчанию
+            showHome();
+            
+            // Скрываем диалог приветствия
+            document.getElementById('welcome-overlay').style.display = 'none';
+            
+            // Добавляем кнопку скролла наверх
+            const scrollButton = document.createElement('button');
+            scrollButton.className = 'scroll-to-top';
+            scrollButton.innerHTML = '↑';
+            scrollButton.onclick = scrollToTop;
+            scrollButton.style.display = 'none';
+            document.body.appendChild(scrollButton);
+            
+            // Добавляем кнопку "Назад"
+            const backButton = document.createElement('button');
+            backButton.className = 'back-button-fixed';
+            backButton.innerHTML = '<span class="icon">←</span><span class="back-text">Назад</span>';
+            backButton.onclick = showHome;
+            backButton.style.display = 'none';
+            document.body.appendChild(backButton);
+            
+            // Показываем/скрываем кнопки при скролле и смене страниц
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollButton.style.display = 'flex';
+                } else {
+                    scrollButton.style.display = 'none';
+                }
+            });
+            
+            // Наблюдаем за изменениями в DOM для показа/скрытия кнопки "Назад"
+            const observer = new MutationObserver(function() {
+                const activeGuide = document.querySelector('.guide-page.active');
+                if (activeGuide) {
+                    backButton.style.display = 'flex';
+                } else {
+                    backButton.style.display = 'none';
+                }
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['class', 'style']
+            });
         });
     </script>
 </body>
