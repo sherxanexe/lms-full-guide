@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance - В разработке</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #add8e6; /* Светло голубой фон */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .maintenance-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .maintenance-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .maintenance-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .maintenance-description {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .status-block {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .status-text {
+            font-size: 1.1em;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .home-button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .maintenance-footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .maintenance-container {
+                padding: 30px 20px;
+            }
+            
+            .maintenance-title {
+                font-size: 2em;
+            }
+            
+            .maintenance-icon {
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="maintenance-container">
+        <div class="maintenance-icon">🔧</div>
+        
+        <h1 class="maintenance-title">In the Maintenance</h1>
+        
+        <p class="maintenance-description">
+            Сайт находится на техническом обслуживании
+        </p>
+        
+        <div class="status-block">
+            <div class="status-text">
+                <strong>📚 Гайды находятся в разработке</strong>
+            </div>
+            <div class="status-text">
+                Мы работаем над созданием полезных материалов для вас
+            </div>
+        </div>
+        
+        <a href="index.html" class="home-button">
+            🏠 Вернуться на главную
+        </a>
+        
+        <div class="maintenance-footer">
+            Спасибо за ваше терпение!
+        </div>
+    </div>
+</body>
+</html>
