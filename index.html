@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -541,46 +541,18 @@
             font-size: 1.2rem;
         }
 
-        .back-button-fixed {
-    position: fixed;
-    top: 2rem;
-    left: 2rem;
-    background: rgba(255, 255, 255, 0.95);
-    color: #1976d2;
-    border: 2px solid #1976d2;
-    border-radius: 50px;
-    padding: 0.75rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    z-index: 999;
-    font-family: inherit;
-    font-size: 0.9rem;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
-}
-        .back-button-fixed:hover {
-    background: #1976d2;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3);
-}
-
-.back-button-fixed:active {
-    transform: translateY(0);
-}
-
-.back-button-fixed .icon {
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-
-.back-button-fixed .back-text {
-    font-size: 0.9rem;
-}
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
 
         .back-button:hover {
             transform: translateY(-2px);
@@ -653,56 +625,9 @@
             gap: 1rem;
             justify-content: center;
         }
-.scroll-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: linear-gradient(135deg, #1976d2, #42a5f5);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    font-family: inherit;
-}
-
-.scroll-to-top:hover {
-    background: linear-gradient(135deg, #1565c0, #1976d2);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
-}
-
-.scroll-to-top:active {
-    transform: translateY(0);
-}
 
         /* Responsive */
         @media (max-width: 768px) {
-.back-button-fixed {
-        top: 1rem;
-        left: 1rem;
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-    }
-    
-    .back-button-fixed .back-text {
-        display: none; /* Скрыть текст на мобильных, оставить только стрелку */
-    }
-    
-    .back-button-fixed {
-        width: 45px;
-        height: 45px;
-        justify-content: center;
-        padding: 0;
-    }
             .main-content {
                 padding: 1rem;
             }
@@ -741,16 +666,7 @@
                 right: auto;
                 left: 0;
             }
-.scroll-to-top {
-        bottom: 1rem;
-        right: 1rem;
-        width: 50px;
-        height: 50px;
-    }
         }
-.guide-page .back-button {
-    display: none !important;
-}
     </style>
 </head>
 <body>
@@ -850,7 +766,9 @@
                 <a href="#" class="menu-item" onclick="showGuide('upload-material')" data-translate="menu.uploadMaterial">
                     Как загрузить учебный материал
                 </a>
-               <a href="https://sherxanexe.github.io/notif-full-guide/" target="_blank" class="menu-item" data-translate="menu.createNotification">Как создать уведомление</a>
+                <a href="#" class="menu-item" onclick="showGuide('create-notification')" data-translate="menu.createNotification">
+                    Как создать уведомление
+                </a>
             </div>
             <div class="menu-section">
                 <div class="menu-section-title" data-translate="menu.management">Управление</div>
@@ -882,7 +800,7 @@
         </div>
     </nav>
 
-    <main class="main-content" id="main-content">    
+    <main class="main-content" id="main-content">
         <!-- Home Page -->
         <div id="home-page">
             <div class="hero-section" id="hero-section">
@@ -935,16 +853,16 @@
                     </div>
                 </div>
 
-                <a href="https://sherxanexe.github.io/notif-full-guide/" target="_blank" class="guide-card" data-guide="create-notification">
-        <div class="guide-status viewed" data-translate-title="status.new" title="Просмотрено">✓</div>
-        <div class="guide-icon">🔔</div>
-        <h3 class="guide-title" data-translate="guides.createNotification.title">Как создать уведомление</h3>
-        <p class="guide-description" data-translate="guides.createNotification.description">Руководство по созданию и отправке уведомлений участникам обучения.</p>
-        <div class="guide-meta">
-        <span class="guide-category" data-translate="categories.communications">Коммуникации</span>
-        <span data-translate="reading.time10">10 мин чтения</span>
-        </div>
-        </a>
+                <div class="guide-card" onclick="showGuide('create-notification')" data-guide="create-notification">
+                    <div class="guide-status new" data-translate-title="status.new">●</div>
+                    <div class="guide-icon">🔔</div>
+                    <h3 class="guide-title" data-translate="guides.createNotification.title">Как создать уведомление</h3>
+                    <p class="guide-description" data-translate="guides.createNotification.description">Руководство по созданию и отправке уведомлений участникам обучения.</p>
+                    <div class="guide-meta">
+                        <span class="guide-category" data-translate="categories.communications">Коммуникации</span>
+                        <span data-translate="reading.time10">10 мин чтения</span>
+                    </div>
+                </div>
 
                 <div class="guide-card" onclick="showGuide('export-report')" data-guide="export-report">
                     <div class="guide-status new" data-translate-title="status.new">●</div>
@@ -981,8 +899,8 @@
     </div>
 </a>
 
-          <a href="course-editing.html" class="guide-card" data-guide="manage-courses" style="text-decoration: none; color: inherit;">
-                    <div class="guide-status viewed" data-translate-title="status.new" title="Просмотрено">✓</div>
+                <div class="guide-card" onclick="showGuide('manage-courses')" data-guide="manage-courses">
+                    <div class="guide-status new" data-translate-title="status.new">●</div>
                     <div class="guide-icon">⚙️</div>
                     <h3 class="guide-title" data-translate="guides.manageCourses.title">Управление курсами</h3>
                     <p class="guide-description" data-translate="guides.manageCourses.description">Полное руководство по администрированию и настройке учебных курсов.</p>
@@ -990,7 +908,8 @@
                         <span class="guide-category" data-translate="categories.management">Управление</span>
                         <span data-translate="reading.time20">20 мин чтения</span>
                     </div>
-                </a>
+                </div>
+
                 <div class="guide-card" onclick="showGuide('new-reports')" data-guide="new-reports">
                     <div class="guide-status new" data-translate-title="status.new">●</div>
                     <div class="guide-icon">📈</div>
@@ -1002,13 +921,37 @@
                     </div>
                 </div>
 
-                
+                <div class="guide-card" onclick="showGuide('certificates')" data-guide="certificates">
+                    <div class="guide-status new" data-translate-title="status.new">●</div>
+                    <div class="guide-icon">🏆</div>
+                    <h3 class="guide-title" data-translate="guides.certificates.title">Сертификаты</h3>
+                    <p class="guide-description" data-translate="guides.certificates.description">Руководство по настройке и выдаче сертификатов об окончании обучения.</p>
+                    <div class="guide-meta">
+                        <span class="guide-category" data-translate="categories.certification">Сертификация</span>
+                        <span data-translate="reading.time18">18 мин чтения</span>
+                    </div>
+                </div>
 
-            
+                <div class="guide-card" onclick="showGuide('faq')" data-guide="faq">
+                    <div class="guide-status new" data-translate-title="status.new">●</div>
+                    <div class="guide-icon">❓</div>
+                    <h3 class="guide-title" data-translate="guides.faq.title">FAQ / Частые вопросы</h3>
+                    <p class="guide-description" data-translate="guides.faq.description">Ответы на наиболее часто задаваемые вопросы по использованию системы.</p>
+                    <div class="guide-meta">
+                        <span class="guide-category" data-translate="categories.support">Поддержка</span>
+                        <span data-translate="reading.time25">25 мин чтения</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-info" id="contact-info">
+                <p data-translate="contact.question">По вопросам обращайтесь:</p>
+                <p class="contact-email">elearning.team@airastana.com</p>
+            </div>
         </div>
 
         <!-- Guide Pages -->
-        <div id="browser-login-page" class="guide-page">
+                        <div id="browser-login-page" class="guide-page">
             <a href="#" class="back-button" onclick="showHome()">
                 <span class="icon">←</span>
                 <span data-translate="back.toList">Вернуться к списку</span>
@@ -1042,8 +985,10 @@
                         Вы можете переключить язык интерфейса в верхнем правом углу
                     </h3>
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Выбор языка интерфейса</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-language-selection.png" alt="Выбор языка интерфейса" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Выбор языка интерфейса</p>
+                        <a href="/images/lms-language-selection.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-language-selection.png
+                        </a>
                     </div>
                 </div>
 
@@ -1057,8 +1002,10 @@
                         Система переадресует вас на страницу входа для сотрудников.
                     </p>
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Кнопка "Войти как сотрудник"</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-employee-login-button.png" alt="Кнопка Войти как сотрудник" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Кнопка "Войти как сотрудник"</p>
+                        <a href="/images/lms-employee-login-button.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-employee-login-button.png
+                        </a>
                     </div>
                 </div>
 
@@ -1072,8 +1019,10 @@
                         (такой, как вводите при включении компьютера, или открытии почты через owa.airastana.com)
                     </p>
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Форма входа Air Astana JSC</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-airastana-login-form.png" alt="Форма входа Air Astana JSC" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Форма входа Air Astana JSC</p>
+                        <a href="/images/lms-airastana-login-form.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-airastana-login-form.png
+                        </a>
                     </div>
                 </div>
 
@@ -1101,7 +1050,6 @@
                 </div>
             </div>
         </div>
-
         <div id="create-course-page" class="guide-page">
             <a href="#" class="back-button" onclick="showHome()">
                 <span class="icon">←</span>
@@ -1125,8 +1073,10 @@
                         Нажмите на "Меню администратора" в верхнем правом углу экрана, затем выберите "Управление курсами".
                     </p>
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Меню администратора</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-admin-menu.png" alt="Меню администратора" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Меню администратора</p>
+                        <a href="/images/lms-admin-menu.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-admin-menu.png
+                        </a>
                     </div>
                 </div>
 
@@ -1140,8 +1090,10 @@
                         Здесь отображается полный список курсов и категорий, доступных вам для администрирования.
                     </p>
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Список курсов и категорий</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-courses-list.png" alt="Список курсов и категорий" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Список курсов и категорий</p>
+                        <a href="/images/lms-courses-list.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-courses-list.png
+                        </a>
                     </div>
                 </div>
 
@@ -1155,8 +1107,10 @@
                         Для редактирования существующего курса просто кликните на его название. Для создания нового курса нажмите <strong>"+"</strong> в верхнем правом углу экрана.
                     </p>
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Кнопка создания курса</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-create-course-button.png" alt="Кнопка создания курса" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Кнопка создания курса</p>
+                        <a href="/images/lms-create-course-button.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-create-course-button.png
+                        </a>
                     </div>
                 </div>
 
@@ -1229,8 +1183,10 @@
                     </div>
 
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Форма создания курса</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-course-creation-form.png" alt="Форма создания курса" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Форма создания курса</p>
+                        <a href="/images/lms-course-creation-form.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-course-creation-form.png
+                        </a>
                     </div>
                 </div>
 
@@ -1253,8 +1209,10 @@
                     </ul>
 
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Вкладка "Свойства"</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-course-properties-tab.png" alt="Вкладка Свойства" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Вкладка "Свойства"</p>
+                        <a href="/images/lms-course-properties-tab.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-course-properties-tab.png
+                        </a>
                     </div>
                 </div>
 
@@ -1283,8 +1241,10 @@
                     </div>
 
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Изменение статуса курса</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-course-status-change.png" alt="Изменение статуса курса" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Изменение статуса курса</p>
+                        <a href="/images/lms-course-status-change.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: lms-course-status-change.png
+                        </a>
                     </div>
                 </div>
 
@@ -1317,7 +1277,9 @@
             </div>
         </div>
 
-        <div id="mobile-app-page" class="guide-page">
+
+
+        </div>        <div id="mobile-app-page" class="guide-page">
             <a href="#" class="back-button" onclick="showHome()">
                 <span class="icon">←</span>
                 <span data-translate="back.toList">Вернуться к списку</span>
@@ -1348,8 +1310,10 @@
                                 iOS: AppStore
                             </h4>
                             <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                                <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 QR-код для App Store</p>
-                                <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/golearn-appstore-qr.png" alt="QR-код для App Store" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 QR-код для App Store</p>
+                                <a href="/images/golearn-appstore-qr.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                                    Посмотреть QR-код: golearn-appstore-qr.png
+                                </a>
                             </div>
                         </div>
 
@@ -1360,8 +1324,10 @@
                                 Android: Google Play
                             </h4>
                             <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                                <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 QR-код для Google Play</p>
-                                <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/golearn-googleplay-qr.png" alt="QR-код для Google Play" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 QR-код для Google Play</p>
+                                <a href="/images/golearn-googleplay-qr.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                                    Посмотреть QR-код: golearn-googleplay-qr.png
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1382,8 +1348,10 @@
                     </div>
 
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Экран настройки Platform URL</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/golearn-platform-url-setup.png" alt="Экран настройки Platform URL" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Экран настройки Platform URL</p>
+                        <a href="/images/golearn-platform-url-setup.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: golearn-platform-url-setup.png
+                        </a>
                     </div>
                 </div>
 
@@ -1398,8 +1366,10 @@
                     </p>
 
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Кнопка "Войти как сотрудник"</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/golearn-employee-login-button.png" alt="Кнопка Войти как сотрудник" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Кнопка "Войти как сотрудник"</p>
+                        <a href="/images/golearn-employee-login-button.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: golearn-employee-login-button.png
+                        </a>
                     </div>
                 </div>
 
@@ -1414,8 +1384,10 @@
                     </p>
 
                     <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Форма входа "Air Astana" JSC</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/golearn-airastana-login-form.png" alt="Форма входа Air Astana JSC" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Форма входа "Air Astana" JSC</p>
+                        <a href="/images/golearn-airastana-login-form.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                            Посмотреть изображение: golearn-airastana-login-form.png
+                        </a>
                     </div>
                 </div>
 
@@ -1460,604 +1432,567 @@
                 </div>
             </div>
         </div>
+<div id="upload-material-page" class="guide-page">
+    <a href="#" class="back-button" onclick="showHome()">
+        <span class="icon">←</span>
+        <span data-translate="back.toList">Вернуться к списку</span>
+    </a>
+    <div class="guide-header">
+        <h1 data-translate="guides.uploadMaterial.title">Как загрузить учебный материал в курс</h1>
+        <p data-translate="guides.uploadMaterial.subtitle">Пошаговая инструкция по добавлению материалов</p>
+    </div>
 
-        <div id="upload-material-page" class="guide-page">
-            <a href="#" class="back-button" onclick="showHome()">
-                <span class="icon">←</span>
-                <span data-translate="back.toList">Вернуться к списку</span>
-            </a>
-            <div class="guide-header">
-                <h1 data-translate="guides.uploadMaterial.title">Как загрузить учебный материал в курс</h1>
-                <p data-translate="guides.uploadMaterial.subtitle">Пошаговая инструкция по добавлению материалов</p>
-            </div>
+    <!-- Основное содержание гайда -->
+    <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;">
 
-            <!-- Основное содержание гайда -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;">
-
-                <!-- Шаг 1 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">1</span>
-                        Заходим в "Меню администратора" → "Управление курсами"
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Выберите нужный курс из списка доступных курсов.
-                    </p>
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Меню администратора и список курсов</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-admin-menu-courses.png" alt="Меню администратора и список курсов" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 2 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">2</span>
-                        Открываем вкладку "Учебный материал"
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Для редактирования существующего курса просто кликните на его название. В открывшемся окне откройте вкладку <strong>"Учебный материал"</strong>. Здесь будет отображаться список всех загруженных в курс материалов.
-                    </p>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Для загрузки нового материала нажмите <strong>"Добавить учебный материал"</strong>
-                    </p>
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Вкладка "Учебный материал"</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-learning-materials-tab.png" alt="Вкладка Учебный материал" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 3 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">3</span>
-                        Выбираем тип загружаемого материала
-                    </h3>
-                    
-                    <!-- SCORM/AICC/xAPI -->
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">📦 SCORM/AICC/xAPI (Tin Can)</h4>
-                        <p style="color: #666; line-height: 1.6; margin: 0;">
-                            Различные форматы интерактивных онлайн курсов, требующих взаимодействия с участником.
-                        </p>
-                    </div>
-
-                    <!-- Видео -->
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎬 Видео</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Загрузка готового видеоролика с компьютера либо предоставление ссылки на внешний источник.
-                        </p>
-                        <div style="background: #fff3cd; border-left: 3px solid #ffc107; padding: 0.8rem; border-radius: 0 6px 6px 0;">
-                            <p style="margin: 0; color: #856404; font-size: 0.9rem;">
-                                <strong>Важно:</strong> Второй вариант (внешние ссылки) не рекомендуется из-за возможной блокировки ресурсов как YouTube и других сайтов.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Файл -->
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">📄 Файл</h4>
-                        <p style="color: #666; line-height: 1.6; margin: 0;">
-                            Загрузка файла в любом формате. Данный файл не будет воспроизводиться в LMS, он просто будет доступен для скачивания участниками.
-                        </p>
-                    </div>
-
-                    <!-- Конвертер слайдов -->
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎨 Конвертер слайдов</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Загрузка презентации в формате PowerPoint либо PDF.
-                        </p>
-                        <div style="background: #f8d7da; border-left: 3px solid #dc3545; padding: 0.8rem; border-radius: 0 6px 6px 0;">
-                            <p style="margin: 0; color: #721c24; font-size: 0.9rem;">
-                                <strong>Важно:</strong> Встроенная анимация, переходы, озвучка, видео автоматически удаляются. Если необходимо их сохранить, используйте другие форматы (загрузите видеоролик отдельно, конвертируйте в SCORM и т.д.)
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Опрос/тест -->
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">❓ Опрос/тест</h4>
-                        <p style="color: #666; line-height: 1.6; margin: 0;">
-                            Единственный тип материала, который создается прямо в LMS. Все остальные материалы разрабатываются в других форматах и загружаются уже в готовом виде.
-                        </p>
-                    </div>
-
-                    <div style="background: #e3f2fd; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; text-align: center;">
-                            📏 Максимальный размер одного файла: <strong>700 МБ</strong> (относится ко всем типам материалов)
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Шаг 4 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">4</span>
-                        Настройка порядка отображения материалов
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        После загрузки всех материалов можно установить порядок их отображения путем перетаскивания.
-                    </p>
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Перетаскивание материалов</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-materials-drag-drop.png" alt="Перетаскивание материалов" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 5 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">5</span>
-                        Дополнительные настройки материалов
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Возле каждого материала есть всплывающее меню, где можно:
-                    </p>
-                    
-                    <ul style="color: #666; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem;">
-                        <li>Удалить ненужные материалы</li>
-                        <li>Заменить обновленной версией</li>
-                        <li>Установить дополнительные настройки</li>
-                        <li>Настроить предпосылки (какие материалы нужно изучить перед доступом к следующему)</li>
-                        <li>Временно скрыть материал от участников</li>
-                    </ul>
-
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🔗 Настройка предпосылок</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            В разделе "Предпосылки" можно настроить последовательность изучения материалов.
-                        </p>
-                        <div style="background: #e8f5e8; border-left: 3px solid #28a745; padding: 0.8rem; border-radius: 0 6px 6px 0;">
-                            <p style="margin: 0; color: #155724; font-size: 0.9rem;">
-                                <strong>Пример:</strong> Для доступа к материалу 3 необходимо пройти первые два материала.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">👁️ Скрытие материалов</h4>
-                        <p style="color: #666; line-height: 1.6; margin: 0;">
-                            В разделе "Настройки" можно временно скрыть материал от участников, не удаляя его из курса.
-                        </p>
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Меню настроек материала</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-material-settings-menu.png" alt="Меню настроек материала" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Настройка предпосылок</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-material-prerequisites.png" alt="Настройка предпосылок" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Скрытие материала</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-material-hide-settings.png" alt="Скрытие материала" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 6 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">6</span>
-                        Добавление мини-приложений курса
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        В нижнем правом углу экрана есть дополнительная опция: <strong>"Добавить мини-приложения курса"</strong>.
-                    </p>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Здесь можно добавить на экран участникам:
-                    </p>
-                    
-                    <ul style="color: #666; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem;">
-                        <li>Описание курса</li>
-                        <li>Область для комментариев</li>
-                        <li>Дополнительные материалы для скачивания</li>
-                        <li>И другие полезные элементы</li>
-                    </ul>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Мини-приложения курса</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-course-mini-apps.png" alt="Мини-приложения курса" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Итог -->
-                <div style="background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; padding: 1.5rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #4caf50; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        ✅ Материалы успешно загружены!
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        После выполнения всех шагов учебные материалы будут доступны участникам курса. Теперь вы можете:
-                    </p>
-                    <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
-                        <li>Отслеживать прогресс изучения материалов</li>
-                        <li>Обновлять контент по мере необходимости</li>
-                        <li>Добавлять новые материалы в любое время</li>
-                        <li>Настраивать последовательность обучения</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Контактная информация -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с загрузкой материалов?</h3>
-                <div style="text-align: center;">
-                    <p style="color: #666; margin-bottom: 0.5rem;">По вопросам загрузки материалов обращайтесь:</p>
-                    <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
-                        elearning.team@airastana.com
-                    </a>
-                </div>
+        <!-- Шаг 1 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">1</span>
+                Заходим в "Меню администратора" → "Управление курсами"
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Выберите нужный курс из списка доступных курсов.
+            </p>
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Меню администратора и список курсов</p>
+                <a href="/images/lms-admin-menu-courses.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-admin-menu-courses.png
+                </a>
             </div>
         </div>
 
-        <div id="create-notification-page" class="guide-page">
-            <a href="#" class="back-button" onclick="showHome()">
-                <span class="icon">←</span>
-                <span data-translate="back.toList">Вернуться к списку</span>
+        <!-- Шаг 2 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">2</span>
+                Открываем вкладку "Учебный материал"
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Для редактирования существующего курса просто кликните на его название. В открывшемся окне откройте вкладку <strong>"Учебный материал"</strong>. Здесь будет отображаться список всех загруженных в курс материалов.
+            </p>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Для загрузки нового материала нажмите <strong>"Добавить учебный материал"</strong>
+            </p>
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Вкладка "Учебный материал"</p>
+                <a href="/images/lms-learning-materials-tab.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-learning-materials-tab.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 3 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">3</span>
+                Выбираем тип загружаемого материала
+            </h3>
+            
+            <!-- SCORM/AICC/xAPI -->
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">📦 SCORM/AICC/xAPI (Tin Can)</h4>
+                <p style="color: #666; line-height: 1.6; margin: 0;">
+                    Различные форматы интерактивных онлайн курсов, требующих взаимодействия с участником.
+                </p>
+            </div>
+
+            <!-- Видео -->
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎬 Видео</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Загрузка готового видеоролика с компьютера либо предоставление ссылки на внешний источник.
+                </p>
+                <div style="background: #fff3cd; border-left: 3px solid #ffc107; padding: 0.8rem; border-radius: 0 6px 6px 0;">
+                    <p style="margin: 0; color: #856404; font-size: 0.9rem;">
+                        <strong>Важно:</strong> Второй вариант (внешние ссылки) не рекомендуется из-за возможной блокировки ресурсов как YouTube и других сайтов.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Файл -->
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">📄 Файл</h4>
+                <p style="color: #666; line-height: 1.6; margin: 0;">
+                    Загрузка файла в любом формате. Данный файл не будет воспроизводиться в LMS, он просто будет доступен для скачивания участниками.
+                </p>
+            </div>
+
+            <!-- Конвертер слайдов -->
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎨 Конвертер слайдов</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Загрузка презентации в формате PowerPoint либо PDF.
+                </p>
+                <div style="background: #f8d7da; border-left: 3px solid #dc3545; padding: 0.8rem; border-radius: 0 6px 6px 0;">
+                    <p style="margin: 0; color: #721c24; font-size: 0.9rem;">
+                        <strong>Важно:</strong> Встроенная анимация, переходы, озвучка, видео автоматически удаляются. Если необходимо их сохранить, используйте другие форматы (загрузите видеоролик отдельно, конвертируйте в SCORM и т.д.)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Опрос/тест -->
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">❓ Опрос/тест</h4>
+                <p style="color: #666; line-height: 1.6; margin: 0;">
+                    Единственный тип материала, который создается прямо в LMS. Все остальные материалы разрабатываются в других форматах и загружаются уже в готовом виде.
+                </p>
+            </div>
+
+            <div style="background: #e3f2fd; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500; text-align: center;">
+                    📏 Максимальный размер одного файла: <strong>700 МБ</strong> (относится ко всем типам материалов)
+                </p>
+            </div>
+        </div>
+
+        <!-- Шаг 4 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">4</span>
+                Настройка порядка отображения материалов
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                После загрузки всех материалов можно установить порядок их отображения путем перетаскивания.
+            </p>
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Перетаскивание материалов</p>
+                <a href="/images/lms-materials-drag-drop.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-materials-drag-drop.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 5 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">5</span>
+                Дополнительные настройки материалов
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Возле каждого материала есть всплывающее меню, где можно:
+            </p>
+            
+            <ul style="color: #666; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                <li>Удалить ненужные материалы</li>
+                <li>Заменить обновленной версией</li>
+                <li>Установить дополнительные настройки</li>
+                <li>Настроить предпосылки (какие материалы нужно изучить перед доступом к следующему)</li>
+                <li>Временно скрыть материал от участников</li>
+            </ul>
+
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🔗 Настройка предпосылок</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    В разделе "Предпосылки" можно настроить последовательность изучения материалов.
+                </p>
+                <div style="background: #e8f5e8; border-left: 3px solid #28a745; padding: 0.8rem; border-radius: 0 6px 6px 0;">
+                    <p style="margin: 0; color: #155724; font-size: 0.9rem;">
+                        <strong>Пример:</strong> Для доступа к материалу 3 необходимо пройти первые два материала.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">👁️ Скрытие материалов</h4>
+                <p style="color: #666; line-height: 1.6; margin: 0;">
+                    В разделе "Настройки" можно временно скрыть материал от участников, не удаляя его из курса.
+                </p>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Меню настроек материала</p>
+                <a href="/images/lms-material-settings-menu.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-material-settings-menu.png
+                </a>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Настройка предпосылок</p>
+                <a href="/images/lms-material-prerequisites.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-material-prerequisites.png
+                </a>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Скрытие материала</p>
+                <a href="/images/lms-material-hide-settings.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-material-hide-settings.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 6 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">6</span>
+                Добавление мини-приложений курса
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                В нижнем правом углу экрана есть дополнительная опция: <strong>"Добавить мини-приложения курса"</strong>.
+            </p>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Здесь можно добавить на экран участникам:
+            </p>
+            
+            <ul style="color: #666; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                <li>Описание курса</li>
+                <li>Область для комментариев</li>
+                <li>Дополнительные материалы для скачивания</li>
+                <li>И другие полезные элементы</li>
+            </ul>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Мини-приложения курса</p>
+                <a href="/images/lms-course-mini-apps.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-course-mini-apps.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Итог -->
+        <div style="background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; padding: 1.5rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #4caf50; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                ✅ Материалы успешно загружены!
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                После выполнения всех шагов учебные материалы будут доступны участникам курса. Теперь вы можете:
+            </p>
+            <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                <li>Отслеживать прогресс изучения материалов</li>
+                <li>Обновлять контент по мере необходимости</li>
+                <li>Добавлять новые материалы в любое время</li>
+                <li>Настраивать последовательность обучения</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Контактная информация -->
+    <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
+        <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с загрузкой материалов?</h3>
+        <div style="text-align: center;">
+            <p style="color: #666; margin-bottom: 0.5rem;">По вопросам загрузки материалов обращайтесь:</p>
+            <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
+                elearning.team@airastana.com
             </a>
-            <div class="guide-header">
-                <h1 data-translate="guides.createNotification.title">Как создать уведомление</h1>
-                <p data-translate="guides.createNotification.subtitle">Пошаговая инструкция по созданию уведомлений</p>
+        </div>
+    </div>
+</div>
+
+        <div id="create-notification-page" class="guide-page">
+    <a href="#" class="back-button" onclick="showHome()">
+        <span class="icon">←</span>
+        <span data-translate="back.toList">Вернуться к списку</span>
+    </a>
+    <div class="guide-header">
+        <h1 data-translate="guides.createNotification.title">Как создать уведомление</h1>
+        <p data-translate="guides.createNotification.subtitle">Пошаговая инструкция по созданию уведомлений</p>
+    </div>
+
+    <!-- Основное содержание гайда -->
+    <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;">
+
+        <!-- Шаг 1 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">1</span>
+                Заходим в "Меню администратора" → "Уведомления"
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Нажмите на "Меню администратора" в верхнем правом углу экрана, затем выберите "Уведомления".
+            </p>
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Меню администратора - Уведомления</p>
+                <a href="/images/lms-admin-menu-notifications.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-admin-menu-notifications.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 2 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">2</span>
+                Создаем новое уведомление
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                На странице уведомлений нажмите кнопку <strong>"Новое уведомление"</strong> для создания нового правила уведомлений.
+            </p>
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Кнопка "Новое уведомление"</p>
+                <a href="/images/lms-new-notification-button.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-new-notification-button.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 3 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">3</span>
+                Настройка основных параметров уведомления
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Выберите событие, при котором будет отправляться данное уведомление, и присвойте ему код:
+            </p>
+            
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎯 Выбор события</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Выберите из выпадающего списка событие, которое будет триггером для отправки уведомления (например, "Пользователь подписался на курс").
+                </p>
             </div>
 
-            <!-- Основное содержание гайда -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;">
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🏷️ Код уведомления</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Рекомендуется присвоить тот же код, который использовался в курсе, для удобства управления.
+                </p>
+            </div>
 
-                <!-- Шаг 1 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">1</span>
-                        Заходим в "Меню администратора" → "Уведомления"
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Нажмите на "Меню администратора" в верхнем правом углу экрана, затем выберите "Уведомления".
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">✉️ Способ доставки</h4>
+                <p style="color: #666; line-height: 1.6; margin: 0;">
+                    Обязательно поставьте галочку в поле <strong>"Эл. почта"</strong> для отправки уведомлений по электронной почте.
+                </p>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Общие настройки уведомления</p>
+                <a href="/images/lms-notification-general-settings.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-notification-general-settings.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 4 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">4</span>
+                Настройка параметров электронной почты
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Переходим во вкладку <strong>"Эл. почта"</strong> (слева) и заполняем обязательные поля:
+            </p>
+
+            <!-- От (имя) -->
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">👤 От (имя)</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    <strong>Необязательное поле.</strong> Можете написать, от чьего имени будет приходить письмо.
+                </p>
+                <div style="background: #f8d7da; border-left: 3px solid #dc3545; padding: 0.8rem; border-radius: 0 6px 6px 0;">
+                    <p style="margin: 0; color: #721c24; font-size: 0.9rem;">
+                        <strong>Важно:</strong> Не указывайте существующие в адресной книге Outlook имена, иначе письмо будет заблокировано системой.
                     </p>
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Меню администратора - Уведомления</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-admin-menu-notifications.png" alt="Меню администратора - Уведомления" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 2 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">2</span>
-                        Создаем новое уведомление
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        На странице уведомлений нажмите кнопку <strong>"Новое уведомление"</strong> для создания нового правила уведомлений.
-                    </p>
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Кнопка "Новое уведомление"</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-new-notification-button.png" alt="Кнопка Новое уведомление" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 3 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">3</span>
-                        Настройка основных параметров уведомления
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Выберите событие, при котором будет отправляться данное уведомление, и присвойте ему код:
-                    </p>
-                    
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎯 Выбор события</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Выберите из выпадающего списка событие, которое будет триггером для отправки уведомления (например, "Пользователь подписался на курс").
-                        </p>
-                    </div>
-
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🏷️ Код уведомления</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Рекомендуется присвоить тот же код, который использовался в курсе, для удобства управления.
-                        </p>
-                    </div>
-
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">✉️ Способ доставки</h4>
-                        <p style="color: #666; line-height: 1.6; margin: 0;">
-                            Обязательно поставьте галочку в поле <strong>"Эл. почта"</strong> для отправки уведомлений по электронной почте.
-                        </p>
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Общие настройки уведомления</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-general-settings.png" alt="Общие настройки уведомления" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 4 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">4</span>
-                        Настройка параметров электронной почты
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Переходим во вкладку <strong>"Эл. почта"</strong> (слева) и заполняем обязательные поля:
-                    </p>
-
-                    <!-- От (имя) -->
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">👤 От (имя)</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            <strong>Необязательное поле.</strong> Можете написать, от чьего имени будет приходить письмо.
-                        </p>
-                        <div style="background: #f8d7da; border-left: 3px solid #dc3545; padding: 0.8rem; border-radius: 0 6px 6px 0;">
-                            <p style="margin: 0; color: #721c24; font-size: 0.9rem;">
-                                <strong>Важно:</strong> Не указывайте существующие в адресной книге Outlook имена, иначе письмо будет заблокировано системой.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- От (электронная почта) -->
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">📧 От (электронная почта)</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Указываем адрес: <strong>noreply@elearning.airastana.com</strong>
-                        </p>
-                        <div style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 1rem; font-family: 'Courier New', monospace; font-size: 1.1rem; color: #1976d2; font-weight: bold; text-align: center;">
-                            noreply@elearning.airastana.com
-                        </div>
-                        <div style="background: #fff3cd; border-left: 3px solid #ffc107; padding: 0.8rem; margin-top: 0.8rem; border-radius: 0 6px 6px 0;">
-                            <p style="margin: 0; color: #856404; font-size: 0.9rem;">
-                                <strong>Важно:</strong> С другого адреса письма не отправятся.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Настройки электронной почты</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-email-settings.png" alt="Настройки электронной почты" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 5 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">5</span>
-                        Настройка языков и содержания письма
-                    </h3>
-                    
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🌐 Выбор языка</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Выберите нужный язык и заполните поля (тема письма и сам текст). Далее <strong>обязательно</strong> выберите второй язык и также заполните поля.
-                        </p>
-                        <div style="background: #e3f2fd; border-left: 3px solid #2196f3; padding: 0.8rem; border-radius: 0 6px 6px 0;">
-                            <p style="margin: 0; color: #1976d2; font-size: 0.9rem;">
-                                <strong>Зачем нужно несколько языков:</strong> Пользователи получают уведомление на том языке, который установлен в их профиле.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">✏️ Редактирование текста</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Текст письма можно отредактировать прямо в интерфейсе:
-                        </p>
-                        <ul style="color: #666; line-height: 1.8; margin-bottom: 0.8rem; padding-left: 1.5rem;">
-                            <li>Изменить цвет, размер, тип шрифта</li>
-                            <li>Добавить картинки и гиперссылки</li>
-                            <li>Форматировать текст</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🔗 Короткие коды</h4>
-                        <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
-                            Внизу страницы есть подсказки с короткими кодами. Их можно вставлять в название темы и текст письма. LMS автоматически подтянет нужные данные из системы.
-                        </p>
-                        <div style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 1rem;">
-                            <p style="margin: 0; color: #666; font-size: 0.9rem;">
-                                <strong>Пример:</strong> Вместо кода <code>[course_name]</code> будет вставлено название курса.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div style="background: #fff3cd; border-left: 3px solid #ffc107; padding: 1rem; border-radius: 0 6px 6px 0;">
-                        <p style="margin: 0; color: #856404; font-size: 0.9rem;">
-                            <strong>Рекомендация:</strong> Поскольку не у всех пользователей язык выбран корректно, удобнее написать текст на двух языках сразу в одном письме и скопировать его во все языковые версии.
-                        </p>
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Редактор текста письма</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-text-editor.png" alt="Редактор текста письма" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Короткие коды</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-short-codes.png" alt="Короткие коды" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 6 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">6</span>
-                        Настройка времени отправки
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Выберите, когда должно отправляться уведомление:
-                    </p>
-                    
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">⏰ Варианты времени отправки</h4>
-                        <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
-                            <li><strong>Во время события</strong> – уведомление отправляется сразу при наступлении события</li>
-                            <li><strong>После события</strong> – уведомление отправляется через определенное время после события</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Настройка времени отправки</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-timing.png" alt="Настройка времени отправки" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 7 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">7</span>
-                        Выбор получателей уведомления
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Определите, кому будут отправляться уведомления:
-                    </p>
-                    
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">👥 Типы получателей</h4>
-                        <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
-                            <li><strong>Пользователи</strong> – обычные участники курсов</li>
-                            <li><strong>Опытные пользователи</strong> – пользователи с расширенными правами</li>
-                            <li><strong>Инструкторы</strong> – преподаватели и тренеры</li>
-                            <li><strong>Супер-администраторы</strong> – администраторы системы</li>
-                            <li><strong>Менеджер</strong> – руководители подразделений</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Выбор получателей</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-recipients.png" alt="Выбор получателей" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Шаг 8 -->
-                <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">8</span>
-                        Привязка к курсам и учебным планам
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        Выберите, к каким именно курсам или учебным планам необходимо привязать уведомление:
-                    </p>
-                    
-                    <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎯 Варианты привязки</h4>
-                        <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
-                            <li><strong>Все курсы</strong> – уведомление будет работать для всех курсов в системе</li>
-                            <li><strong>Выбранные курсы</strong> – уведомление будет работать только для указанных курсов</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: #e3f2fd; border-left: 3px solid #2196f3; padding: 1rem; border-radius: 0 6px 6px 0;">
-                        <p style="margin: 0; color: #1976d2; font-size: 0.9rem;">
-                            <strong>Рекомендация:</strong> Для большего контроля выбирайте конкретные курсы, а не "все курсы" сразу.
-                        </p>
-                    </div>
-
-                    <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Привязка к курсам</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-course-binding.png" alt="Привязка к курсам" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Итог -->
-                <div style="background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; padding: 1.5rem; border-radius: 0 8px 8px 0;">
-                    <h3 style="color: #4caf50; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        ✅ Уведомление успешно создано!
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                        После выполнения всех шагов ваше уведомление будет активировано и готово к отправке. Теперь участники будут получать автоматические уведомления согласно настроенным правилам.
-                    </p>
-                    <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
-                        <li>Уведомления отправляются автоматически при наступлении событий</li>
-                        <li>Можно в любое время отредактировать настройки</li>
-                        <li>Возможно создать несколько уведомлений для разных событий</li>
-                        <li>Система поддерживает персонализацию через короткие коды</li>
-                    </ul>
                 </div>
             </div>
-<div style="background: rgba(33, 150, 243, 0.1); border-left: 4px solid #2196f3; padding: 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-    <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-        📚 Дополнительные ресурсы
-    </h3>
-    <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-        Для более детального руководства по настройке уведомлений, включая продвинутые возможности и примеры использования, посетите:
-    </p>
-    <div style="text-align: center; margin-top: 1.5rem;">
-        <a href="https://sherxanexe.github.io/notif-full-guide" 
-           target="_blank" 
-           style="display: inline-block; background: linear-gradient(135deg, #1976d2, #42a5f5); color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3); transition: all 0.3s ease;">
-            🔗 Полный гайд по уведомлениям
-        </a>
+
+            <!-- От (электронная почта) -->
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">📧 От (электронная почта)</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Указываем адрес: <strong>noreply@elearning.airastana.com</strong>
+                </p>
+                <div style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 1rem; font-family: 'Courier New', monospace; font-size: 1.1rem; color: #1976d2; font-weight: bold; text-align: center;">
+                    noreply@elearning.airastana.com
+                </div>
+                <div style="background: #fff3cd; border-left: 3px solid #ffc107; padding: 0.8rem; margin-top: 0.8rem; border-radius: 0 6px 6px 0;">
+                    <p style="margin: 0; color: #856404; font-size: 0.9rem;">
+                        <strong>Важно:</strong> С другого адреса письма не отправятся.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Настройки электронной почты</p>
+                <a href="/images/lms-notification-email-settings.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-notification-email-settings.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 5 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">5</span>
+                Настройка языков и содержания письма
+            </h3>
+            
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🌐 Выбор языка</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Выберите нужный язык и заполните поля (тема письма и сам текст). Далее <strong>обязательно</strong> выберите второй язык и также заполните поля.
+                </p>
+                <div style="background: #e3f2fd; border-left: 3px solid #2196f3; padding: 0.8rem; border-radius: 0 6px 6px 0;">
+                    <p style="margin: 0; color: #1976d2; font-size: 0.9rem;">
+                        <strong>Зачем нужно несколько языков:</strong> Пользователи получают уведомление на том языке, который установлен в их профиле.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">✏️ Редактирование текста</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Текст письма можно отредактировать прямо в интерфейсе:
+                </p>
+                <ul style="color: #666; line-height: 1.8; margin-bottom: 0.8rem; padding-left: 1.5rem;">
+                    <li>Изменить цвет, размер, тип шрифта</li>
+                    <li>Добавить картинки и гиперссылки</li>
+                    <li>Форматировать текст</li>
+                </ul>
+            </div>
+
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🔗 Короткие коды</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.8rem;">
+                    Внизу страницы есть подсказки с короткими кодами. Их можно вставлять в название темы и текст письма. LMS автоматически подтянет нужные данные из системы.
+                </p>
+                <div style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 1rem;">
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">
+                        <strong>Пример:</strong> Вместо кода <code>[course_name]</code> будет вставлено название курса.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #fff3cd; border-left: 3px solid #ffc107; padding: 1rem; border-radius: 0 6px 6px 0;">
+                <p style="margin: 0; color: #856404; font-size: 0.9rem;">
+                    <strong>Рекомендация:</strong> Поскольку не у всех пользователей язык выбран корректно, удобнее написать текст на двух языках сразу в одном письме и скопировать его во все языковые версии.
+                </p>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Редактор текста письма</p>
+                <a href="/images/lms-notification-text-editor.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-notification-text-editor.png
+                </a>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Короткие коды</p>
+                <a href="/images/lms-notification-short-codes.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-notification-short-codes.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 6 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">6</span>
+                Настройка времени отправки
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Выберите, когда должно отправляться уведомление:
+            </p>
+            
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">⏰ Варианты времени отправки</h4>
+                <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                    <li><strong>Во время события</strong> – уведомление отправляется сразу при наступлении события</li>
+                    <li><strong>После события</strong> – уведомление отправляется через определенное время после события</li>
+                </ul>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Настройка времени отправки</p>
+                <a href="/images/lms-notification-timing.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-notification-timing.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 7 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">7</span>
+                Выбор получателей уведомления
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Определите, кому будут отправляться уведомления:
+            </p>
+            
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">👥 Типы получателей</h4>
+                <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                    <li><strong>Пользователи</strong> – обычные участники курсов</li>
+                    <li><strong>Опытные пользователи</strong> – пользователи с расширенными правами</li>
+                    <li><strong>Инструкторы</strong> – преподаватели и тренеры</li>
+                    <li><strong>Супер-администраторы</strong> – администраторы системы</li>
+                    <li><strong>Менеджер</strong> – руководители подразделений</li>
+                </ul>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Выбор получателей</p>
+                <a href="/images/lms-notification-recipients.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-notification-recipients.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Шаг 8 -->
+        <div style="border-left: 4px solid #1976d2; background: rgba(25, 118, 210, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #1976d2; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="background: #1976d2; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold;">8</span>
+                Привязка к курсам и учебным планам
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                Выберите, к каким именно курсам или учебным планам необходимо привязать уведомление:
+            </p>
+            
+            <div style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <h4 style="color: #333; margin-bottom: 0.8rem; font-size: 1.1rem;">🎯 Варианты привязки</h4>
+                <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                    <li><strong>Все курсы</strong> – уведомление будет работать для всех курсов в системе</li>
+                    <li><strong>Выбранные курсы</strong> – уведомление будет работать только для указанных курсов</li>
+                </ul>
+            </div>
+
+            <div style="background: #e3f2fd; border-left: 3px solid #2196f3; padding: 1rem; border-radius: 0 6px 6px 0;">
+                <p style="margin: 0; color: #1976d2; font-size: 0.9rem;">
+                    <strong>Рекомендация:</strong> Для большего контроля выбирайте конкретные курсы, а не "все курсы" сразу.
+                </p>
+            </div>
+
+            <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                <p style="margin: 0; color: #1976d2; font-weight: 500;">📷 Скриншот: Привязка к курсам</p>
+                <a href="/images/lms-notification-course-binding.png" target="_blank" style="color: #1976d2; text-decoration: underline; font-size: 0.9rem;">
+                    Посмотреть изображение: lms-notification-course-binding.png
+                </a>
+            </div>
+        </div>
+
+        <!-- Итог -->
+        <div style="background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; padding: 1.5rem; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #4caf50; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                ✅ Уведомление успешно создано!
+            </h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                После выполнения всех шагов ваше уведомление будет активировано и готово к отправке. Теперь участники будут получать автоматические уведомления согласно настроенным правилам.
+            </p>
+            <ul style="color: #666; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                <li>Уведомления отправляются автоматически при наступлении событий</li>
+                <li>Можно в любое время отредактировать настройки</li>
+                <li>Возможно создать несколько уведомлений для разных событий</li>
+                <li>Система поддерживает персонализацию через короткие коды</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Контактная информация -->
+    <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
+        <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с настройкой уведомлений?</h3>
+        <div style="text-align: center;">
+            <p style="color: #666; margin-bottom: 0.5rem;">По вопросам настройки уведомлений обращайтесь:</p>
+            <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
+                elearning.team@airastana.com
+            </a>
+        </div>
     </div>
 </div>
 
 
-           <div style="background: #f0f8ff; border: 1px solid #1976d2; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <p style="margin: 0; color: #1976d2; font-weight: 500; margin-bottom: 1rem;">📷 Скриншот: Привязка к курсам</p>
-                        <img src="https://raw.githubusercontent.com/sherxanexe/lms-full-guide/main/images/lms-notification-course-binding.png" alt="Привязка к курсам" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                    </div>
-                </div>
-
-                <!-- Итог -->
-               
-            </div>
-
-            
-
-            <!-- Контактная информация -->
-            <div style="background: linear-gradient(135deg, #1976d2, #42a5f5); padding: 3rem 2rem; border-radius: 15px; box-shadow: 0 20px 40px rgba(25, 118, 210, 0.3); margin-top: 3rem; position: relative; overflow: hidden;">
-                <!-- Декоративные элементы -->
-                <div style="position: absolute; top: -50px; right: -50px; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.1); border-radius: 50%;"></div>
-                <div style="position: absolute; bottom: -30px; left: -30px; width: 60px; height: 60px; background: rgba(255, 255, 255, 0.1); border-radius: 50%;"></div>
-                
-                <div style="position: relative; z-index: 2;">
-                    <h3 style="color: white; margin-bottom: 1.5rem; text-align: center; font-size: 1.8rem; font-weight: bold;">
-                        💬 Нужна помощь?
-                    </h3>
-                    <div style="text-align: center;">
-                        <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 1.5rem; font-size: 1.2rem; line-height: 1.6;">
-                            Наша команда E-Learning готова помочь вам с любыми вопросами по использованию системы
-                        </p>
-                        <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-radius: 12px; padding: 1.5rem; margin: 1.5rem auto; max-width: 400px;">
-                            <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.8rem; font-size: 1rem;">
-                                📧 Свяжитесь с нами:
-                            </p>
-                            <a href="mailto:elearning.team@airastana.com" 
-                               style="display: inline-block; background: white; color: #1976d2; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;">
-                                elearning.team@airastana.com
-                            </a>
-                        </div>
-                        <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
-                            <div style="text-align: center;">
-                                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.8rem; font-size: 1.5rem;">
-                                    ⚡
-                                </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; font-weight: 500;">
-                                    Быстрая поддержка
-                                </p>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.8rem; font-size: 1.5rem;">
-                                    🎯
-                                </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; font-weight: 500;">
-                                    Персональные решения
-                                </p>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.8rem; font-size: 1.5rem;">
-                                    🔧
-                                </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; font-weight: 500;">
-                                    Техническая помощь
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
         <!-- Остальные страницы гайдов... -->
     </main>
 
@@ -2379,113 +2314,7 @@
         let currentTourStep = 0;
         let tourActive = false;
         let viewedGuides = JSON.parse(localStorage.getItem('viewedGuides')) || [];
-// Исправленная функция показа/скрытия кнопки "Назад"
-function updateBackButton() {
-    const backButton = document.getElementById('back-button');
-    const homePage = document.getElementById('home-page');
-    
-    // Проверяем, находимся ли мы на главной странице
-    if (homePage && homePage.style.display !== 'none') {
-        // На главной странице - скрываем кнопку
-        backButton.style.display = 'none';
-    } else {
-        // На странице гайда - показываем кнопку
-        backButton.style.display = 'flex';
-    }
-}
 
-// Обновить существующие функции показа страниц
-function showHome() {
-    // Скрыть все страницы гайдов
-    const guidePages = document.querySelectorAll('.guide-page');
-    guidePages.forEach(page => {
-        page.style.display = 'none';
-        page.classList.remove('active');
-    });
-    
-    // Показать главную страницу
-    const homePage = document.getElementById('home-page');
-    homePage.style.display = 'block';
-    
-    // Обновить активный пункт меню
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    const homeMenuItem = document.querySelector('.menu-item[onclick="showHome()"]');
-    if (homeMenuItem) {
-        homeMenuItem.classList.add('active');
-    }
-    
-    // Обновить кнопку "Назад"
-    updateBackButton();
-    
-    // Закрыть боковое меню на мобильных
-    closeSidebar();
-    
-    // Прокрутить наверх
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function showGuide(guideId) {
-    // Отметить гайд как просмотренный
-    if (!viewedGuides.includes(guideId)) {
-        viewedGuides.push(guideId);
-        localStorage.setItem('viewedGuides', JSON.stringify(viewedGuides));
-        updateGuideStatus();
-    }
-
-    // Скрыть главную страницу
-    const homePage = document.getElementById('home-page');
-    homePage.style.display = 'none';
-    
-    // Скрыть все страницы гайдов
-    const guidePages = document.querySelectorAll('.guide-page');
-    guidePages.forEach(page => {
-        page.style.display = 'none';
-        page.classList.remove('active');
-    });
-    
-    // Показать нужную страницу гайда
-    const targetPage = document.getElementById(guideId + '-page');
-    if (targetPage) {
-        targetPage.style.display = 'block';
-        targetPage.classList.add('active');
-    }
-    
-    // Обновить активный пункт меню
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    const menuItem = document.querySelector(`.menu-item[onclick="showGuide('${guideId}')"]`);
-    if (menuItem) {
-        menuItem.classList.add('active');
-    }
-    
-    // Обновить кнопку "Назад"
-    updateBackButton();
-    
-    // Закрыть боковое меню на мобильных
-    closeSidebar();
-    
-    // Прокрутить наверх
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Вызвать функцию при загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация других функций...
-    updateBackButton();
-});
-
-// Показать/скрыть кнопку "Наверх"
-window.addEventListener('scroll', function() {
-    const scrollToTopBtn = document.getElementById('scroll-to-top');
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.style.display = 'flex';
-    } else {
-        scrollToTopBtn.style.display = 'none';
-    }
-});
         // Translation function
         function t(key) {
             return translations[currentLanguage]?.[key] || translations['ru'][key] || key;
@@ -2785,42 +2614,17 @@ window.addEventListener('scroll', function() {
                 }
             });
         });
-// Показать/скрыть кнопку "Наверх"
-window.addEventListener('scroll', function() {
-    const scrollToTopBtn = document.getElementById('scroll-to-top');
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.style.display = 'flex';
-    } else {
-        scrollToTopBtn.style.display = 'none';
-    }
-});
 
-// Показать/скрыть кнопку "Наверх" - работает на всех страницах
-window.addEventListener('scroll', function() {
-    const scrollToTopBtn = document.getElementById('scroll-to-top');
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.style.display = 'flex';
-    } else {
-        scrollToTopBtn.style.display = 'none';
-    }
-});
-
-// Функция плавной прокрутки наверх
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+            if (tourActive) {
+                showTourStep();
+            }
+        });
     </script>
-<button id="scroll-to-top" class="scroll-to-top" onclick="scrollToTop()" style="display: none;">
-    <span style="font-size: 1.2rem;">↑</span>
-    <span style="font-size: 0.9rem; margin-top: 0.2rem;">Наверх</span>
-</button>
-<button id="back-button" class="back-button-fixed" onclick="showHome()">
-    <span class="icon">←</span>
-    <span class="back-text">Назад</span>
-</button>
 </body>
 </html>
 
