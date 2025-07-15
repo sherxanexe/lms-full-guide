@@ -667,6 +667,162 @@
                 left: 0;
             }
         }
+        /* Footer Styles */
+.site-footer {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    color: white;
+    margin-top: 4rem;
+    padding: 3rem 0 1rem;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo {
+    margin-bottom: 1rem;
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.footer-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.footer-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-contact-label {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.footer-contact-email {
+    color: #ffeb3b;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.footer-contact-email:hover {
+    color: #fff59d;
+    text-decoration: underline;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+}
+
+.footer-link:hover {
+    color: #ffeb3b;
+    border-bottom-color: rgba(255, 235, 59, 0.3);
+    padding-left: 0.5rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-copyright,
+.footer-version {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 0.85rem;
+}
+
+.footer-version {
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-container {
+        padding: 0 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .footer-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .footer-link {
+        flex: 1;
+        min-width: 120px;
+    }
+}
     </style>
 </head>
 <body>
@@ -738,67 +894,67 @@
     <div class="overlay" onclick="closeSidebar()"></div>
 
     <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-title" data-translate="sidebar.title">Руководства</div>
-            <div class="sidebar-subtitle" data-translate="sidebar.subtitle">Выберите инструкцию</div>
+    <div class="sidebar-header">
+        <div class="sidebar-title" data-translate="sidebar.title">Руководства</div>
+        <div class="sidebar-subtitle" data-translate="sidebar.subtitle">Выберите инструкцию</div>
+    </div>
+    <div class="sidebar-menu" id="sidebar-menu">
+        <div class="menu-section">
+            <div class="menu-section-title" data-translate="menu.main">Основное</div>
+            <a href="#" class="menu-item active" onclick="showHome()" data-translate="menu.home">
+                Главная
+            </a>
         </div>
-        <div class="sidebar-menu" id="sidebar-menu">
-            <div class="menu-section">
-                <div class="menu-section-title" data-translate="menu.main">Основное</div>
-                <a href="#" class="menu-item active" onclick="showHome()" data-translate="menu.home">
-                    Главная
-                </a>
-            </div>
-            <div class="menu-section">
-                <div class="menu-section-title" data-translate="menu.gettingStarted">Начало работы</div>
-                <a href="#" class="menu-item" onclick="showGuide('browser-login')" data-translate="menu.browserLogin">
-                    Как войти в ЛМС через браузер
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('mobile-app')" data-translate="menu.mobileApp">
-                    Как установить мобильное приложение
-                </a>
-            </div>
-            <div class="menu-section">
-                <div class="menu-section-title" data-translate="menu.contentCreation">Создание контента</div>
-                <a href="#" class="menu-item" onclick="showGuide('create-course')" data-translate="menu.createCourse">
-                    Как создать курс в LMS
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('upload-material')" data-translate="menu.uploadMaterial">
-                    Как загрузить учебный материал
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('create-notification')" data-translate="menu.createNotification">
-                    Как создать уведомление
-                </a>
-            </div>
-            <div class="menu-section">
-                <div class="menu-section-title" data-translate="menu.management">Управление</div>
-                <a href="#" class="menu-item" onclick="showGuide('enroll-participants')" data-translate="menu.enrollParticipants">
-                    Как зачислить участников
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('manage-groups')" data-translate="menu.manageGroups">
-                    Управление группами
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('manage-courses')" data-translate="menu.manageCourses">
-                    Управление курсами
-                </a>
-            </div>
-            <div class="menu-section">
-                <div class="menu-section-title" data-translate="menu.reporting">Отчетность</div>
-                <a href="#" class="menu-item" onclick="showGuide('export-report')" data-translate="menu.exportReport">
-                    Как выгрузить отчет
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('new-reports')" data-translate="menu.newReports">
-                    Новые отчеты
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('certificates')" data-translate="menu.certificates">
-                    Сертификаты
-                </a>
-                <a href="#" class="menu-item" onclick="showGuide('faq')" data-translate="menu.faq">
-                    FAQ / Частые вопросы
-                </a>
-            </div>
+        <div class="menu-section">
+            <div class="menu-section-title" data-translate="menu.gettingStarted">Начало работы</div>
+            <a href="#" class="menu-item" onclick="showGuide('browser-login')" data-translate="menu.browserLogin">
+                Как войти в ЛМС через браузер
+            </a>
+            <a href="#" class="menu-item" onclick="showGuide('mobile-app')" data-translate="menu.mobileApp">
+                Как установить мобильное приложение
+            </a>
         </div>
-    </nav>
+        <div class="menu-section">
+            <div class="menu-section-title" data-translate="menu.contentCreation">Создание контента</div>
+            <a href="#" class="menu-item" onclick="showGuide('create-course')" data-translate="menu.createCourse">
+                Как создать курс в LMS
+            </a>
+            <a href="#" class="menu-item" onclick="showGuide('upload-material')" data-translate="menu.uploadMaterial">
+                Как загрузить учебный материал
+            </a>
+            <a href="#" class="menu-item" onclick="showGuide('create-notification')" data-translate="menu.createNotification">
+                Как создать уведомление
+            </a>
+        </div>
+        <div class="menu-section">
+            <div class="menu-section-title" data-translate="menu.management">Управление</div>
+            <a href="enrollment.html" class="menu-item" data-translate="menu.enrollParticipants">
+                Как зачислить участников
+            </a>
+            <a href="groups.html" class="menu-item" data-translate="menu.manageGroups">
+                Управление группами
+            </a>
+            <a href="#" class="menu-item" onclick="showGuide('manage-courses')" data-translate="menu.manageCourses">
+                Управление курсами
+            </a>
+        </div>
+        <div class="menu-section">
+            <div class="menu-section-title" data-translate="menu.reporting">Отчетность</div>
+            <a href="#" class="menu-item" onclick="showGuide('export-report')" data-translate="menu.exportReport">
+                Как выгрузить отчет
+            </a>
+            <a href="#" class="menu-item" onclick="showGuide('new-reports')" data-translate="menu.newReports">
+                Новые отчеты
+            </a>
+            <a href="#" class="menu-item" onclick="showGuide('certificates')" data-translate="menu.certificates">
+                Сертификаты
+            </a>
+            <a href="#" class="menu-item" onclick="showGuide('faq')" data-translate="menu.faq">
+                FAQ / Частые вопросы
+            </a>
+        </div>
+    </div>
+</nav>
 
     <main class="main-content" id="main-content">
         <!-- Home Page -->
@@ -853,51 +1009,69 @@
                     </div>
                 </div>
 
-                <div class="guide-card" onclick="showGuide('create-notification')" data-guide="create-notification">
-                    <div class="guide-status new" data-translate-title="status.new">●</div>
-                    <div class="guide-icon">🔔</div>
-                    <h3 class="guide-title" data-translate="guides.createNotification.title">Как создать уведомление</h3>
-                    <p class="guide-description" data-translate="guides.createNotification.description">Руководство по созданию и отправке уведомлений участникам обучения.</p>
-                    <div class="guide-meta">
-                        <span class="guide-category" data-translate="categories.communications">Коммуникации</span>
-                        <span data-translate="reading.time10">10 мин чтения</span>
-                    </div>
-                </div>
-
-                <div class="guide-card" onclick="showGuide('export-report')" data-guide="export-report">
-                    <div class="guide-status new" data-translate-title="status.new">●</div>
-                    <div class="guide-icon">📊</div>
-                    <h3 class="guide-title" data-translate="guides.exportReport.title">Как выгрузить отчет</h3>
-                    <p class="guide-description" data-translate="guides.exportReport.description">Пошаговая инструкция по созданию и экспорту отчетов о прогрессе обучения.</p>
-                    <div class="guide-meta">
-                        <span class="guide-category" data-translate="categories.reports">Отчеты</span>
-                        <span data-translate="reading.time8">8 мин чтения</span>
-                    </div>
-                </div>
-
-                <a href="enrollment.html" class="guide-card-link" style="text-decoration: none; color: inherit;">
-    <div class="guide-card" data-guide="enroll-participants">
+                <a href="https://sherxanexe.github.io/notif-full-guide/" class="guide-card-link" style="text-decoration: none; color: inherit;" target="_blank">
+    <div class="guide-card" data-guide="create-notification">
         <div class="guide-status viewed" data-translate-title="status.new" title="Просмотрено">✓</div>
-        <div class="guide-icon">👥</div>
-        <h3 class="guide-title" data-translate="guides.enrollParticipants.title">Как зачислить участников на тренинг</h3>
-        <p class="guide-description" data-translate="guides.enrollParticipants.description">Руководство по добавлению участников на учебные курсы и тренинги.</p>
+        <div class="guide-icon">🔔</div>
+        <h3 class="guide-title" data-translate="guides.createNotification.title">Как создать уведомление</h3>
+        <p class="guide-description" data-translate="guides.createNotification.description">Руководство по созданию и отправке уведомлений участникам обучения.</p>
         <div class="guide-meta">
-            <span class="guide-category" data-translate="categories.management">Управление</span>
+            <span class="guide-category" data-translate="categories.communications">Коммуникации</span>
             <span data-translate="reading.time10">10 мин чтения</span>
         </div>
     </div>
 </a>
 
-               <a href="groups.html" class="guide-card" data-guide="manage-groups" style="text-decoration: none; color: inherit;">
-    <div class="guide-status viewed" data-translate-title="status.new" title="Просмотрено">✓</div>
-    <div class="guide-icon">🏷️</div>
-    <h3 class="guide-title" data-translate="guides.manageGroups.title">Управление группами</h3>
-    <p class="guide-description" data-translate="guides.manageGroups.description">Инструкция по созданию и управлению учебными группами в системе.</p>
-    <div class="guide-meta">
-        <span class="guide-category" data-translate="categories.management">Управление</span>
-        <span data-translate="reading.time12">12 мин чтения</span>
-    </div>
+                <a
+  class="guide-card"
+  href="https://sherxanexe.github.io/lms-old-reports/"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-guide="export-report"
+  style="text-decoration: none; color: inherit;"
+>
+  <div class="guide-status new" data-translate-title="status.new">●</div>
+  <div class="guide-icon">📊</div>
+  <h3 class="guide-title" data-translate="guides.exportReport.title">
+    Как выгрузить отчет
+  </h3>
+  <p
+    class="guide-description"
+    data-translate="guides.exportReport.description"
+  >
+    Пошаговая инструкция по созданию и экспорту отчетов о прогрессе обучения.
+  </p>
+  <div class="guide-meta">
+    <span class="guide-category" data-translate="categories.reports">
+      Отчеты
+    </span>
+    <span data-translate="reading.time8">8 мин чтения</span>
+  </div>
 </a>
+
+                <a href="enrollment.html" class="guide-card-link" style="text-decoration: none; color: inherit;">
+                    <div class="guide-card" data-guide="enroll-participants">
+                        <div class="guide-status viewed" data-translate-title="status.new" title="Просмотрено">✓</div>
+                        <div class="guide-icon">👥</div>
+                        <h3 class="guide-title" data-translate="guides.enrollParticipants.title">Как зачислить участников на тренинг</h3>
+                        <p class="guide-description" data-translate="guides.enrollParticipants.description">Руководство по добавлению участников на учебные курсы и тренинги.</p>
+                        <div class="guide-meta">
+                            <span class="guide-category" data-translate="categories.management">Управление</span>
+                            <span data-translate="reading.time10">10 мин чтения</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="groups.html" class="guide-card" data-guide="manage-groups" style="text-decoration: none; color: inherit;">
+                    <div class="guide-status viewed" data-translate-title="status.new" title="Просмотрено">✓</div>
+                    <div class="guide-icon">🏷️</div>
+                    <h3 class="guide-title" data-translate="guides.manageGroups.title">Управление группами</h3>
+                    <p class="guide-description" data-translate="guides.manageGroups.description">Инструкция по созданию и управлению учебными группами в системе.</p>
+                    <div class="guide-meta">
+                        <span class="guide-category" data-translate="categories.management">Управление</span>
+                        <span data-translate="reading.time12">12 мин чтения</span>
+                    </div>
+                </a>
 
                 <div class="guide-card" onclick="showGuide('manage-courses')" data-guide="manage-courses">
                     <div class="guide-status new" data-translate-title="status.new">●</div>
@@ -1030,17 +1204,6 @@
                         <li>Те же учетные данные, что для Windows и корпоративной почты</li>
                         <li>Доступ к owa.airastana.com с теми же данными</li>
                     </ul>
-                </div>
-            </div>
-
-            <!-- Контактная информация -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь?</h3>
-                <div style="text-align: center;">
-                    <p style="color: #666; margin-bottom: 0.5rem;">По вопросам обращайтесь:</p>
-                    <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
-                        elearning.team@airastana.com
-                    </a>
                 </div>
             </div>
         </div>
@@ -1247,17 +1410,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Контактная информация -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с созданием курса?</h3>
-                <div style="text-align: center;">
-                    <p style="color: #666; margin-bottom: 0.5rem;">По вопросам создания курсов обращайтесь:</p>
-                    <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
-                        elearning.team@airastana.com
-                    </a>
-                </div>
-            </div>
         </div>
 
         <div id="mobile-app-page" class="guide-page">
@@ -1389,17 +1541,6 @@
                         <li>Приложение поддерживает работу оффлайн после загрузки контента</li>
                         <li>Platform URL: <strong>lms.airastana.com</strong> (без https://)</li>
                     </ul>
-                </div>
-            </div>
-
-            <!-- Контактная информация -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с установкой?</h3>
-                <div style="text-align: center;">
-                    <p style="color: #666; margin-bottom: 0.5rem;">По вопросам установки обращайтесь:</p>
-                    <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
-                        elearning.team@airastana.com
-                    </a>
                 </div>
             </div>
         </div>
@@ -1622,17 +1763,6 @@
                         <li>Добавлять новые материалы в любое время</li>
                         <li>Настраивать последовательность обучения</li>
                     </ul>
-                </div>
-            </div>
-
-            <!-- Контактная информация -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с загрузкой материалов?</h3>
-                <div style="text-align: center;">
-                    <p style="color: #666; margin-bottom: 0.5rem;">По вопросам загрузки материалов обращайтесь:</p>
-                    <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
-                        elearning.team@airastana.com
-                    </a>
                 </div>
             </div>
         </div>
@@ -1919,19 +2049,53 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Контактная информация -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1976d2; margin-bottom: 1rem; text-align: center;">Нужна помощь с настройкой уведомлений?</h3>
-                <div style="text-align: center;">
-                    <p style="color: #666; margin-bottom: 0.5rem;">По вопросам настройки уведомлений обращайтесь:</p>
-                    <a href="mailto:elearning.team@airastana.com" style="color: #1976d2; font-weight: bold; font-size: 1.1rem; text-decoration: none;">
-                        elearning.team@airastana.com
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3 class="footer-title" data-translate="footer.title">Центр обучения</h3>
+                        <p class="footer-subtitle" data-translate="footer.subtitle">Air Astana JSC</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-section-title" data-translate="footer.support">Поддержка</h4>
+                    <div class="footer-contact">
+                        <p class="footer-contact-label" data-translate="footer.contactLabel">По вопросам обращайтесь:</p>
+                        <a href="mailto:elearning.team@airastana.com" class="footer-contact-email">
+                            elearning.team@airastana.com
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-section-title" data-translate="footer.quickLinks">Быстрые ссылки</h4>
+                    <div class="footer-links">
+                        <a href="#" onclick="showHome()" class="footer-link" data-translate="footer.home">Главная</a>
+                        <a href="#" onclick="showGuide('browser-login')" class="footer-link" data-translate="footer.browserLogin">Вход в систему</a>
+                        <a href="#" onclick="showGuide('mobile-app')" class="footer-link" data-translate="footer.mobileApp">Мобильное приложение</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    <span data-translate="footer.copyright">© 2024 Air Astana JSC. Все права защищены.</span>
+                </p>
+                <p class="footer-version">
+                    <span data-translate="footer.version">Версия системы: 2.0</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Остальные страницы гайдов... -->
+
 
     
 
@@ -1941,277 +2105,313 @@
     <script>
         // Translations object
         const translations = {
-            ru: {
-              'guides.createNotification.subtitle': 'Пошаговая инструкция по созданию уведомлений',
-                'site.title': 'Центр обучения',
-                'welcome.title': 'Добро пожаловать в Центр обучения!',
-                'welcome.description': 'Хотите ли вы ознакомиться с интерфейсом? Мы покажем вам основные элементы и функции системы.',
-                'welcome.startTour': 'Да, показать тур',
-                'welcome.skip': 'Пропустить',
-                'tour.prev': 'Назад',
-                'tour.next': 'Далее',
-                'tour.finish': 'Завершить',
-                'sidebar.title': 'Руководства',
-                'sidebar.subtitle': 'Выберите инструкцию',
-                'menu.main': 'Основное',
-                'menu.home': 'Главная',
-                'menu.gettingStarted': 'Начало работы',
-                'menu.browserLogin': 'Как войти в ЛМС через браузер',
-                'menu.mobileApp': 'Как установить мобильное приложение',
-                'menu.contentCreation': 'Создание контента',
-                'menu.createCourse': 'Как создать курс в LMS',
-                'menu.uploadMaterial': 'Как загрузить учебный материал',
-                'menu.createNotification': 'Как создать уведомление',
-                'menu.management': 'Управление',
-                'menu.enrollParticipants': 'Как зачислить участников',
-                'menu.manageGroups': 'Управление группами',
-                'menu.manageCourses': 'Управление курсами',
-                'menu.reporting': 'Отчетность',
-                'menu.exportReport': 'Как выгрузить отчет',
-                'menu.newReports': 'Новые отчеты',
-                'menu.certificates': 'Сертификаты',
-                'menu.faq': 'FAQ / Частые вопросы',
-                'hero.title': 'Добро пожаловать в LMS',
-                'hero.subtitle': 'Полные руководства по использованию системы управления обучением',
-                'status.new': 'Новый гайд',
-                'status.viewed': 'Просмотрено',
-                'categories.gettingStarted': 'Начало работы',
-                'categories.mobile': 'Мобильное',
-                'categories.content': 'Контент',
-                'categories.communications': 'Коммуникации',
-                'categories.reports': 'Отчеты',
-                'categories.management': 'Управление',
-                'categories.certification': 'Сертификация',
-                'categories.support': 'Поддержка',
-                'reading.time5': '5 мин чтения',
-                'reading.time8': '8 мин чтения',
-                'reading.time10': '10 мин чтения',
-                'reading.time12': '12 мин чтения',
-                'reading.time15': '15 мин чтения',
-                'reading.time18': '18 мин чтения',
-                'reading.time20': '20 мин чтения',
-                'reading.time25': '25 мин чтения',
-                'contact.question': 'По вопросам обращайтесь:',
-                'back.toList': 'Вернуться к списку',
-                'guides.browserLogin.title': 'Как войти в ЛМС через браузер с компьютера',
-                'guides.browserLogin.description': 'Пошаговая инструкция по входу в систему управления обучением через веб-браузер.',
-                'guides.browserLogin.subtitle': 'Пошаговая инструкция по входу в систему',
-                'guides.browserLogin.contentTitle': 'Вход в систему управления обучением',
-                'guides.browserLogin.content': 'Здесь будет размещен полный контент руководства по входу в ЛМС через браузер...',
-                'guides.mobileApp.title': 'Как установить мобильное приложение',
-                'guides.uploadMaterial.subtitle': 'Как правильно загружать материалы к учебному курсу',
-                'guides.mobileApp.description': 'Руководство по установке и настройке мобильного приложения LMS для Android и iOS.',
-                'guides.mobileApp.subtitle': 'Руководство по установке мобильного приложения',
-                'guides.mobileApp.contentTitle': 'Установка мобильного приложения',
-                'guides.mobileApp.content': 'Здесь будет размещен полный контент руководства по установке мобильного приложения...',
-                'guides.createCourse.title': 'Как создать курс в LMS',
-                'guides.createCourse.description': 'Детальное руководство по созданию учебного курса в системе управления обучением.',
-                'guides.uploadMaterial.title': 'Как загрузить учебный материал в курс',
-                'guides.uploadMaterial.description': 'Инструкция по добавлению различных типов учебных материалов в созданные курсы.',
-                'guides.createNotification.title': 'Как создать уведомление',
-                'guides.createNotification.description': 'Руководство по созданию и отправке уведомлений участникам обучения.',
-                'guides.exportReport.title': 'Как выгрузить отчет',
-                'guides.exportReport.description': 'Пошаговая инструкция по созданию и экспорту отчетов о прогрессе обучения.',
-                'guides.enrollParticipants.title': 'Как зачислить участников на тренинг',
-                'guides.enrollParticipants.description': 'Руководство по добавлению участников на учебные курсы и тренинги.',
-                'guides.manageGroups.title': 'Управление группами',
-                'guides.manageGroups.description': 'Инструкция по созданию и управлению учебными группами в системе.',
-                'guides.manageCourses.title': 'Управление курсами',
-                'guides.manageCourses.description': 'Полное руководство по администрированию и настройке учебных курсов.',
-                'guides.newReports.title': 'Новые отчеты',
-                'guides.newReports.description': 'Обзор новых возможностей отчетности и аналитики в системе.',
-                'guides.certificates.title': 'Сертификаты',
-                'guides.certificates.description': 'Руководство по настройке и выдаче сертификатов об окончании обучения.',
-                'guides.faq.title': 'FAQ / Частые вопросы',
-                'guides.faq.description': 'Ответы на наиболее часто задаваемые вопросы по использованию системы.',
-                'tour.menuNavigation.title': 'Меню навигации',
-                'tour.menuNavigation.description': 'Нажмите на эту кнопку, чтобы открыть боковое меню со всеми доступными руководствами и инструкциями.',
-                'tour.guidesList.title': 'Список руководств',
-                'tour.guidesList.description': 'Здесь находятся все доступные руководства, разделенные по категориям. Выберите нужный раздел для изучения.',
-                'tour.guidesGrid.title': 'Каталог руководств',
-                'tour.guidesGrid.description': 'Все доступные руководства и инструкции представлены в виде карточек. Нажмите на любую карточку, чтобы открыть руководство.'
-            },
-            en: {
-                'site.title': 'Learning Center',
-                'welcome.title': 'Welcome to the Learning Center!',
-                'welcome.description': 'Would you like to familiarize yourself with the interface? We will show you the main elements and functions of the system.',
-                'welcome.startTour': 'Yes, show tour',
-                'welcome.skip': 'Skip',
-                'tour.prev': 'Back',
-                'tour.next': 'Next',
-                'tour.finish': 'Finish',
-                'sidebar.title': 'Guides',
-                'sidebar.subtitle': 'Select an instruction',
-                'menu.main': 'Main',
-                'menu.home': 'Home',
-                'menu.gettingStarted': 'Getting Started',
-                'menu.browserLogin': 'How to login to LMS via browser',
-                'menu.mobileApp': 'How to install mobile app',
-                'menu.contentCreation': 'Content Creation',
-                'menu.createCourse': 'How to create a course in LMS',
-                'menu.uploadMaterial': 'How to upload learning material',
-                'menu.createNotification': 'How to create a notification',
-                'menu.management': 'Management',
-                'menu.enrollParticipants': 'How to enroll participants',
-                'menu.manageGroups': 'Group management',
-                'menu.manageCourses': 'Course management',
-                'menu.reporting': 'Reporting',
-                'menu.exportReport': 'How to export report',
-                'menu.newReports': 'New reports',
-                'menu.certificates': 'Certificates',
-                'menu.faq': 'FAQ / Frequently asked questions',
-                'hero.title': 'Welcome to LMS',
-                'hero.subtitle': 'Complete guides for using the learning management system',
-                'status.new': 'New guide',
-                'status.viewed': 'Viewed',
-                'categories.gettingStarted': 'Getting Started',
-                'categories.mobile': 'Mobile',
-                'categories.content': 'Content',
-                'categories.communications': 'Communications',
-                'categories.reports': 'Reports',
-                'categories.management': 'Management',
-                'categories.certification': 'Certification',
-                'categories.support': 'Support',
-                'reading.time5': '5 min read',
-                'reading.time8': '8 min read',
-                'reading.time10': '10 min read',
-                'reading.time12': '12 min read',
-                'reading.time15': '15 min read',
-                'reading.time18': '18 min read',
-                'reading.time20': '20 min read',
-                'reading.time25': '25 min read',
-                'contact.question': 'For questions, contact:',
-                'back.toList': 'Back to list',
-                'guides.browserLogin.title': 'How to login to LMS via browser from computer',
-                'guides.browserLogin.description': 'Step-by-step instructions for logging into the learning management system via web browser.',
-                'guides.browserLogin.subtitle': 'Step-by-step instructions for system login',
-                'guides.browserLogin.contentTitle': 'Login to learning management system',
-                'guides.browserLogin.content': 'Full content guide for logging into LMS via browser will be placed here...',
-                'guides.mobileApp.title': 'How to install mobile application',
-                'guides.mobileApp.description': 'Guide for installing and configuring LMS mobile application for Android and iOS.',
-                'guides.mobileApp.subtitle': 'Mobile application installation guide',
-                'guides.mobileApp.contentTitle': 'Mobile application installation',
-                'guides.mobileApp.content': 'Full content guide for mobile application installation will be placed here...',
-                'guides.createCourse.title': 'How to create a course in LMS',
-                'guides.uploadMaterial.subtitle': 'How to upload files to the course',
-                'guides.createCourse.description': 'Detailed guide for creating an educational course in the learning management system.',
-                'guides.uploadMaterial.title': 'How to upload learning material to course',
-                'guides.uploadMaterial.description': 'Instructions for adding various types of learning materials to created courses.',
-                'guides.createNotification.title': 'How to create a notification',
-                'guides.createNotification.description': 'Guide for creating and sending notifications to learning participants.',
-                'guides.exportReport.title': 'How to export report',
-                'guides.exportReport.description': 'Step-by-step instructions for creating and exporting learning progress reports.',
-                'guides.enrollParticipants.title': 'How to enroll participants in training',
-                'guides.enrollParticipants.description': 'Guide for adding participants to educational courses and trainings.',
-                'guides.manageGroups.title': 'Group management',
-                'guides.manageGroups.description': 'Instructions for creating and managing learning groups in the system.',
-                'guides.manageCourses.title': 'Course management',
-                'guides.manageCourses.description': 'Complete guide for administering and configuring educational courses.',
-                'guides.newReports.title': 'New reports',
-                'guides.newReports.description': 'Overview of new reporting and analytics capabilities in the system.',
-                'guides.certificates.title': 'Certificates',
-                'guides.certificates.description': 'Guide for setting up and issuing completion certificates.',
-                'guides.faq.title': 'FAQ / Frequently asked questions',
-                'guides.faq.description': 'Answers to the most frequently asked questions about using the system.',
-                'tour.menuNavigation.title': 'Navigation menu',
-                'tour.menuNavigation.description': 'Click this button to open the side menu with all available guides and instructions.',
-                'tour.guidesList.title': 'Guides list',
-                'tour.guidesList.description': 'Here are all available guides, divided by categories. Select the section you need to study.',
-                'guides.createNotification.subtitle': 'Step-by-step guide to creating notifications',
-                'tour.guidesGrid.title': 'Guides catalog',
-                'tour.guidesGrid.description': 'All available guides and instructions are presented as cards. Click on any card to open the guide.'
-            },
-            kk: {
-                'site.title': 'Оқыту орталығы',
-                'welcome.title': 'Оқыту орталығына қош келдіңіз!',
-                'welcome.description': 'Интерфейспен танысуды қалайсыз ба? Біз сізге жүйенің негізгі элементтері мен функцияларын көрсетеміз.',
-                'welcome.startTour': 'Иә, турды көрсету',
-                'welcome.skip': 'Өткізу',
-                'tour.prev': 'Артқа',
-                'tour.next': 'Келесі',
-                'tour.finish': 'Аяқтау',
-                'sidebar.title': 'Нұсқаулықтар',
-                'sidebar.subtitle': 'Нұсқаулықты таңдаңыз',
-                'menu.main': 'Негізгі',
-                'menu.home': 'Басты бет',
-                'menu.gettingStarted': 'Жұмысты бастау',
-                'menu.browserLogin': 'Браузер арқылы ЛМЖ-ға кіру',
-                'menu.mobileApp': 'Мобильді қосымшаны орнату',
-                'menu.contentCreation': 'Мазмұн жасау',
-                'menu.createCourse': 'ЛМЖ-да курс жасау',
-                'menu.uploadMaterial': 'Оқу материалын жүктеу',
-                'menu.createNotification': 'Хабарландыру жасау',
-                'menu.management': 'Басқару',
-                'menu.enrollParticipants': 'Қатысушыларды тіркеу',
-                'menu.manageGroups': 'Топтарды басқару',
-                'menu.manageCourses': 'Курстарды басқару',
-                'menu.reporting': 'Есептеме',
-                'menu.exportReport': 'Есепті шығару',
-                'menu.newReports': 'Жаңа есептемелер',
-                'menu.certificates': 'Сертификаттар',
-                'menu.faq': 'ЖҚС / Жиі қойылатын сұрақтар',
-                'hero.title': 'ЛМЖ-ға қош келдіңіз',
-                'hero.subtitle': 'Оқуды басқару жүйесін пайдалану бойынша толық нұсқаулықтар',
-                'status.new': 'Жаңа нұсқаулық',
-                'status.viewed': 'Қаралды',
-                'categories.gettingStarted': 'Жұмысты бастау',
-                'categories.mobile': 'Мобильді',
-                'categories.content': 'Мазмұн',
-                'categories.communications': 'Байланыс',
-                'categories.reports': 'Есептемелер',
-                'categories.management': 'Басқару',
-                'categories.certification': 'Сертификаттау',
-                'categories.support': 'Қолдау',
-                'reading.time5': '5 мин оқу',
-                'reading.time8': '8 мин оқу',
-                'reading.time10': '10 мин оқу',
-                'reading.time12': '12 мин оқу',
-                'reading.time15': '15 мин оқу',
-                'reading.time18': '18 мин оқу',
-                'reading.time20': '20 мин оқу',
-                'reading.time25': '25 мин оқу',
-                'contact.question': 'Сұрақтар бойынша хабарласыңыз:',
-                'back.toList': 'Тізімге оралу',
-                'guides.browserLogin.title': 'Компьютердің браузері арқылы ЛМЖ-ға кіру',
-                'guides.browserLogin.description': 'Веб-браузер арқылы оқуды басқару жүйесіне кіру бойынша қадамдық нұсқаулық.',
-                'guides.browserLogin.subtitle': 'Жүйеге кіру бойынша қадамдық нұсқаулық',
-                'guides.browserLogin.contentTitle': 'Оқуды басқару жүйесіне кіру',
-                'guides.browserLogin.content': 'Браузер арқылы ЛМЖ-ға кіру бойынша толық мазмұн нұсқаулығы мұнда орналастырылады...',
-                'guides.mobileApp.title': 'Мобильді қосымшаны орнату',
-                'guides.mobileApp.description': 'Android және iOS үшін ЛМЖ мобильді қосымшасын орнату және баптау нұсқаулығы.',
-                'guides.mobileApp.subtitle': 'Мобильді қосымшаны орнату нұсқаулығы',
-                'guides.mobileApp.contentTitle': 'Мобильді қосымшаны орнату',
-                'guides.mobileApp.content': 'Мобильді қосымшаны орнату бойынша толық мазмұн нұсқаулығы мұнда орналастырылады...',
-                'guides.createCourse.title': 'ЛМЖ-да курс жасау',
-                'guides.uploadMaterial.subtitle': 'ЛМЖ-ға оқу материалдарды еңгізу',
-                'guides.createCourse.description': 'Оқуды басқару жүйесінде оқу курсын жасау бойынша толық нұсқаулық.',
-                'guides.uploadMaterial.title': 'Курсқа оқу материалын жүктеу',
-                'guides.uploadMaterial.description': 'Жасалған курстарға әртүрлі оқу материалдарын қосу бойынша нұсқаулық.',
-                'guides.createNotification.title': 'Хабарландыру жасау',
-                'guides.createNotification.description': 'Оқу қатысушыларына хабарландыру жасау және жіберу нұсқаулығы.',
-                'guides.exportReport.title': 'Есепті шығару',
-                'guides.exportReport.description': 'Оқу прогресі туралы есептерді жасау және экспорттау бойынша қадамдық нұсқаулық.',
-                'guides.enrollParticipants.title': 'Тренингке қатысушыларды тіркеу',
-                'guides.enrollParticipants.description': 'Оқу курстары мен тренингтерге қатысушыларды қосу нұсқаулығы.',
-                'guides.manageGroups.title': 'Топтарды басқару',
-                'guides.manageGroups.description': 'Жүйеде оқу топтарын жасау және басқару нұсқаулығы.',
-                'guides.manageCourses.title': 'Курстарды басқару',
-                'guides.manageCourses.description': 'Оқу курстарын әкімшілендіру және баптау бойынша толық нұсқаулық.',
-                'guides.newReports.title': 'Жаңа есептемелер',
-                'guides.newReports.description': 'Жүйедегі жаңа есептеме және аналитика мүмкіндіктеріне шолу.',
-                'guides.certificates.title': 'Сертификаттар',
-                'guides.certificates.description': 'Оқуды аяқтау туралы сертификаттарды баптау және беру нұсқаулығы.',
-                'guides.faq.title': 'ЖҚС / Жиі қойылатын сұрақтар',
-                'guides.faq.description': 'Жүйені пайдалану бойынша ең жиі қойылатын сұрақтарға жауаптар.',
-                'tour.menuNavigation.title': 'Навигация мәзірі',
-                'tour.menuNavigation.description': 'Барлық қолжетімді нұсқаулықтар мен нұсқаулармен бүйірлік мәзірді ашу үшін осы түймені басыңыз.',
-                'tour.guidesList.title': 'Нұсқаулықтар тізімі',
-                'tour.guidesList.description': 'Мұнда категориялар бойынша бөлінген барлық қолжетімді нұсқаулықтар бар. Зерделеу үшін қажетті бөлімді таңдаңыз.',
-                'tour.guidesGrid.title': 'Нұсқаулықтар каталогы',
-                'guides.createNotification.subtitle': 'Хабарландыру жасау бойынша қадамдық нұсқаулық',
-                'tour.guidesGrid.description': 'Барлық қолжетімді нұсқаулықтар мен нұсқаулар карточкалар түрінде ұсынылған. Нұсқаулықты ашу үшін кез келген карточканы басыңыз.'
-            }
-        };
+    ru: {
+        'guides.createNotification.subtitle': 'Пошаговая инструкция по созданию уведомлений',
+        'site.title': 'Центр обучения',
+        'welcome.title': 'Добро пожаловать в Центр обучения!',
+        'welcome.description': 'Хотите ли вы ознакомиться с интерфейсом? Мы покажем вам основные элементы и функции системы.',
+        'welcome.startTour': 'Да, показать тур',
+        'welcome.skip': 'Пропустить',
+        'tour.prev': 'Назад',
+        'tour.next': 'Далее',
+        'tour.finish': 'Завершить',
+        'sidebar.title': 'Руководства',
+        'sidebar.subtitle': 'Выберите инструкцию',
+        'menu.main': 'Основное',
+        'menu.home': 'Главная',
+        'menu.gettingStarted': 'Начало работы',
+        'menu.browserLogin': 'Как войти в ЛМС через браузер',
+        'menu.mobileApp': 'Как установить мобильное приложение',
+        'menu.contentCreation': 'Создание контента',
+        'menu.createCourse': 'Как создать курс в LMS',
+        'menu.uploadMaterial': 'Как загрузить учебный материал',
+        'menu.createNotification': 'Как создать уведомление',
+        'menu.management': 'Управление',
+        'menu.enrollParticipants': 'Как зачислить участников',
+        'menu.manageGroups': 'Управление группами',
+        'menu.manageCourses': 'Управление курсами',
+        'menu.reporting': 'Отчетность',
+        'menu.exportReport': 'Как выгрузить отчет',
+        'menu.newReports': 'Новые отчеты',
+        'menu.certificates': 'Сертификаты',
+        'menu.faq': 'FAQ / Частые вопросы',
+        'hero.title': 'Добро пожаловать в LMS',
+        'hero.subtitle': 'Полные руководства по использованию системы управления обучением',
+        'status.new': 'Новый гайд',
+        'status.viewed': 'Просмотрено',
+        'categories.gettingStarted': 'Начало работы',
+        'categories.mobile': 'Мобильное',
+        'categories.content': 'Контент',
+        'categories.communications': 'Коммуникации',
+        'categories.reports': 'Отчеты',
+        'categories.management': 'Управление',
+        'categories.certification': 'Сертификация',
+        'categories.support': 'Поддержка',
+        'reading.time5': '5 мин чтения',
+        'reading.time8': '8 мин чтения',
+        'reading.time10': '10 мин чтения',
+        'reading.time12': '12 мин чтения',
+        'reading.time15': '15 мин чтения',
+        'reading.time18': '18 мин чтения',
+        'reading.time20': '20 мин чтения',
+        'reading.time25': '25 мин чтения',
+        'contact.question': 'По вопросам обращайтесь:',
+        'back.toList': 'Вернуться к списку',
+        'guides.browserLogin.title': 'Как войти в ЛМС через браузер с компьютера',
+        'guides.browserLogin.description': 'Пошаговая инструкция по входу в систему управления обучением через веб-браузер.',
+        'guides.browserLogin.subtitle': 'Пошаговая инструкция по входу в систему',
+        'guides.browserLogin.contentTitle': 'Вход в систему управления обучением',
+        'guides.browserLogin.content': 'Здесь будет размещен полный контент руководства по входу в ЛМС через браузер...',
+        'guides.mobileApp.title': 'Как установить мобильное приложение',
+        'guides.uploadMaterial.subtitle': 'Как правильно загружать материалы к учебному курсу',
+        'guides.mobileApp.description': 'Руководство по установке и настройке мобильного приложения LMS для Android и iOS.',
+        'guides.mobileApp.subtitle': 'Руководство по установке мобильного приложения',
+        'guides.mobileApp.contentTitle': 'Установка мобильного приложения',
+        'guides.mobileApp.content': 'Здесь будет размещен полный контент руководства по установке мобильного приложения...',
+        'guides.createCourse.title': 'Как создать курс в LMS',
+        'guides.createCourse.description': 'Детальное руководство по созданию учебного курса в системе управления обучением.',
+        'guides.uploadMaterial.title': 'Как загрузить учебный материал в курс',
+        'guides.uploadMaterial.description': 'Инструкция по добавлению различных типов учебных материалов в созданные курсы.',
+        'guides.createNotification.title': 'Как создать уведомление',
+        'guides.createNotification.description': 'Руководство по созданию и отправке уведомлений участникам обучения.',
+        'guides.exportReport.title': 'Как выгрузить отчет',
+        'guides.exportReport.description': 'Пошаговая инструкция по созданию и экспорту отчетов о прогрессе обучения.',
+        'guides.enrollParticipants.title': 'Как зачислить участников на тренинг',
+        'guides.enrollParticipants.description': 'Руководство по добавлению участников на учебные курсы и тренинги.',
+        'guides.manageGroups.title': 'Управление группами',
+        'guides.manageGroups.description': 'Инструкция по созданию и управлению учебными группами в системе.',
+        'guides.manageCourses.title': 'Управление курсами',
+        'guides.manageCourses.description': 'Полное руководство по администрированию и настройке учебных курсов.',
+        'guides.newReports.title': 'Новые отчеты',
+        'guides.newReports.description': 'Обзор новых возможностей отчетности и аналитики в системе.',
+        'guides.certificates.title': 'Сертификаты',
+        'guides.certificates.description': 'Руководство по настройке и выдаче сертификатов об окончании обучения.',
+        'guides.faq.title': 'FAQ / Частые вопросы',
+        'guides.faq.description': 'Ответы на наиболее часто задаваемые вопросы по использованию системы.',
+        'tour.menuNavigation.title': 'Меню навигации',
+        'tour.menuNavigation.description': 'Нажмите на эту кнопку, чтобы открыть боковое меню со всеми доступными руководствами и инструкциями.',
+        'tour.guidesList.title': 'Список руководств',
+        'tour.guidesList.description': 'Здесь находятся все доступные руководства, разделенные по категориям. Выберите нужный раздел для изучения.',
+        'tour.guidesGrid.title': 'Каталог руководств',
+        'tour.guidesGrid.description': 'Все доступные руководства и инструкции представлены в виде карточек. Нажмите на любую карточку, чтобы открыть руководство.',
+        
+        // Footer translations
+        'footer.title': 'Центр обучения',
+        'footer.subtitle': 'Air Astana JSC',
+        'footer.support': 'Поддержка',
+        'footer.contactLabel': 'По вопросам обращайтесь:',
+        'footer.quickLinks': 'Быстрые ссылки',
+        'footer.home': 'Главная',
+        'footer.browserLogin': 'Вход в систему',
+        'footer.mobileApp': 'Мобильное приложение',
+        'footer.copyright': '© 2024 Air Astana JSC. Все права защищены.',
+        'footer.version': 'Версия системы: 2.0'
+    },
+    en: {
+        'site.title': 'Learning Center',
+        'welcome.title': 'Welcome to the Learning Center!',
+        'welcome.description': 'Would you like to familiarize yourself with the interface? We will show you the main elements and functions of the system.',
+        'welcome.startTour': 'Yes, show tour',
+        'welcome.skip': 'Skip',
+        'tour.prev': 'Back',
+        'tour.next': 'Next',
+        'tour.finish': 'Finish',
+        'sidebar.title': 'Guides',
+        'sidebar.subtitle': 'Select an instruction',
+        'menu.main': 'Main',
+        'menu.home': 'Home',
+        'menu.gettingStarted': 'Getting Started',
+        'menu.browserLogin': 'How to login to LMS via browser',
+        'menu.mobileApp': 'How to install mobile app',
+        'menu.contentCreation': 'Content Creation',
+        'menu.createCourse': 'How to create a course in LMS',
+        'menu.uploadMaterial': 'How to upload learning material',
+        'menu.createNotification': 'How to create a notification',
+        'menu.management': 'Management',
+        'menu.enrollParticipants': 'How to enroll participants',
+        'menu.manageGroups': 'Group management',
+        'menu.manageCourses': 'Course management',
+        'menu.reporting': 'Reporting',
+        'menu.exportReport': 'How to export report',
+        'menu.newReports': 'New reports',
+        'menu.certificates': 'Certificates',
+        'menu.faq': 'FAQ / Frequently asked questions',
+        'hero.title': 'Welcome to LMS',
+        'hero.subtitle': 'Complete guides for using the learning management system',
+        'status.new': 'New guide',
+        'status.viewed': 'Viewed',
+        'categories.gettingStarted': 'Getting Started',
+        'categories.mobile': 'Mobile',
+        'categories.content': 'Content',
+        'categories.communications': 'Communications',
+        'categories.reports': 'Reports',
+        'categories.management': 'Management',
+        'categories.certification': 'Certification',
+        'categories.support': 'Support',
+        'reading.time5': '5 min read',
+        'reading.time8': '8 min read',
+        'reading.time10': '10 min read',
+        'reading.time12': '12 min read',
+        'reading.time15': '15 min read',
+        'reading.time18': '18 min read',
+        'reading.time20': '20 min read',
+        'reading.time25': '25 min read',
+        'contact.question': 'For questions, contact:',
+        'back.toList': 'Back to list',
+        'guides.browserLogin.title': 'How to login to LMS via browser from computer',
+        'guides.browserLogin.description': 'Step-by-step instructions for logging into the learning management system via web browser.',
+        'guides.browserLogin.subtitle': 'Step-by-step instructions for system login',
+        'guides.browserLogin.contentTitle': 'Login to learning management system',
+        'guides.browserLogin.content': 'Full content guide for logging into LMS via browser will be placed here...',
+        'guides.mobileApp.title': 'How to install mobile application',
+        'guides.mobileApp.description': 'Guide for installing and configuring LMS mobile application for Android and iOS.',
+        'guides.mobileApp.subtitle': 'Mobile application installation guide',
+        'guides.mobileApp.contentTitle': 'Mobile application installation',
+        'guides.mobileApp.content': 'Full content guide for mobile application installation will be placed here...',
+        'guides.createCourse.title': 'How to create a course in LMS',
+        'guides.uploadMaterial.subtitle': 'How to upload files to the course',
+        'guides.createCourse.description': 'Detailed guide for creating an educational course in the learning management system.',
+        'guides.uploadMaterial.title': 'How to upload learning material to course',
+        'guides.uploadMaterial.description': 'Instructions for adding various types of learning materials to created courses.',
+        'guides.createNotification.title': 'How to create a notification',
+        'guides.createNotification.description': 'Guide for creating and sending notifications to learning participants.',
+        'guides.exportReport.title': 'How to export report',
+        'guides.exportReport.description': 'Step-by-step instructions for creating and exporting learning progress reports.',
+        'guides.enrollParticipants.title': 'How to enroll participants in training',
+        'guides.enrollParticipants.description': 'Guide for adding participants to educational courses and trainings.',
+        'guides.manageGroups.title': 'Group management',
+        'guides.manageGroups.description': 'Instructions for creating and managing learning groups in the system.',
+        'guides.manageCourses.title': 'Course management',
+        'guides.manageCourses.description': 'Complete guide for administering and configuring educational courses.',
+        'guides.newReports.title': 'New reports',
+        'guides.newReports.description': 'Overview of new reporting and analytics capabilities in the system.',
+        'guides.certificates.title': 'Certificates',
+        'guides.certificates.description': 'Guide for setting up and issuing completion certificates.',
+        'guides.faq.title': 'FAQ / Frequently asked questions',
+        'guides.faq.description': 'Answers to the most frequently asked questions about using the system.',
+        'tour.menuNavigation.title': 'Navigation menu',
+        'tour.menuNavigation.description': 'Click this button to open the side menu with all available guides and instructions.',
+        'tour.guidesList.title': 'Guides list',
+        'tour.guidesList.description': 'Here are all available guides, divided by categories. Select the section you need to study.',
+        'guides.createNotification.subtitle': 'Step-by-step guide to creating notifications',
+        'tour.guidesGrid.title': 'Guides catalog',
+        'tour.guidesGrid.description': 'All available guides and instructions are presented as cards. Click on any card to open the guide.',
+        
+        // Footer translations
+        'footer.title': 'Learning Center',
+        'footer.subtitle': 'Air Astana JSC',
+        'footer.support': 'Support',
+        'footer.contactLabel': 'For questions, contact:',
+        'footer.quickLinks': 'Quick Links',
+        'footer.home': 'Home',
+        'footer.browserLogin': 'System Login',
+        'footer.mobileApp': 'Mobile App',
+        'footer.copyright': '© 2024 Air Astana JSC. All rights reserved.',
+        'footer.version': 'System version: 2.0'
+    },
+    kk: {
+        'site.title': 'Оқыту орталығы',
+        'welcome.title': 'Оқыту орталығына қош келдіңіз!',
+        'welcome.description': 'Интерфейспен танысуды қалайсыз ба? Біз сізге жүйенің негізгі элементтері мен функцияларын көрсетеміз.',
+        'welcome.startTour': 'Иә, турды көрсету',
+        'welcome.skip': 'Өткізу',
+        'tour.prev': 'Артқа',
+        'tour.next': 'Келесі',
+        'tour.finish': 'Аяқтау',
+        'sidebar.title': 'Нұсқаулықтар',
+        'sidebar.subtitle': 'Нұсқаулықты таңдаңыз',
+        'menu.main': 'Негізгі',
+        'menu.home': 'Басты бет',
+        'menu.gettingStarted': 'Жұмысты бастау',
+        'menu.browserLogin': 'Браузер арқылы ЛМЖ-ға кіру',
+        'menu.mobileApp': 'Мобильді қосымшаны орнату',
+        'menu.contentCreation': 'Мазмұн жасау',
+        'menu.createCourse': 'ЛМЖ-да курс жасау',
+        'menu.uploadMaterial': 'Оқу материалын жүктеу',
+        'menu.createNotification': 'Хабарландыру жасау',
+        'menu.management': 'Басқару',
+        'menu.enrollParticipants': 'Қатысушыларды тіркеу',
+        'menu.manageGroups': 'Топтарды басқару',
+        'menu.manageCourses': 'Курстарды басқару',
+        'menu.reporting': 'Есептеме',
+        'menu.exportReport': 'Есепті шығару',
+        'menu.newReports': 'Жаңа есептемелер',
+        'menu.certificates': 'Сертификаттар',
+        'menu.faq': 'ЖҚС / Жиі қойылатын сұрақтар',
+        'hero.title': 'ЛМЖ-ға қош келдіңіз',
+        'hero.subtitle': 'Оқуды басқару жүйесін пайдалану бойынша толық нұсқаулықтар',
+        'status.new': 'Жаңа нұсқаулық',
+        'status.viewed': 'Қаралды',
+        'categories.gettingStarted': 'Жұмысты бастау',
+        'categories.mobile': 'Мобильді',
+        'categories.content': 'Мазмұн',
+        'categories.communications': 'Байланыс',
+        'categories.reports': 'Есептемелер',
+        'categories.management': 'Басқару',
+        'categories.certification': 'Сертификаттау',
+        'categories.support': 'Қолдау',
+        'reading.time5': '5 мин оқу',
+        'reading.time8': '8 мин оқу',
+        'reading.time10': '10 мин оқу',
+        'reading.time12': '12 мин оқу',
+        'reading.time15': '15 мин оқу',
+        'reading.time18': '18 мин оқу',
+        'reading.time20': '20 мин оқу',
+        'reading.time25': '25 мин оқу',
+        'contact.question': 'Сұрақтар бойынша хабарласыңыз:',
+        'back.toList': 'Тізімге оралу',
+        'guides.browserLogin.title': 'Компьютердің браузері арқылы ЛМЖ-ға кіру',
+        'guides.browserLogin.description': 'Веб-браузер арқылы оқуды басқару жүйесіне кіру бойынша қадамдық нұсқаулық.',
+        'guides.browserLogin.subtitle': 'Жүйеге кіру бойынша қадамдық нұсқаулық',
+        'guides.browserLogin.contentTitle': 'Оқуды басқару жүйесіне кіру',
+        'guides.browserLogin.content': 'Браузер арқылы ЛМЖ-ға кіру бойынша толық мазмұн нұсқаулығы мұнда орналастырылады...',
+        'guides.mobileApp.title': 'Мобильді қосымшаны орнату',
+        'guides.mobileApp.description': 'Android және iOS үшін ЛМЖ мобильді қосымшасын орнату және баптау нұсқаулығы.',
+        'guides.mobileApp.subtitle': 'Мобильді қосымшаны орнату нұсқаулығы',
+        'guides.mobileApp.contentTitle': 'Мобильді қосымшаны орнату',
+        'guides.mobileApp.content': 'Мобильді қосымшаны орнату бойынша толық мазмұн нұсқаулығы мұнда орналастырылады...',
+        'guides.createCourse.title': 'ЛМЖ-да курс жасау',
+        'guides.uploadMaterial.subtitle': 'ЛМЖ-ға оқу материалдарды енгізу',
+        'guides.createCourse.description': 'Оқуды басқару жүйесінде оқу курсын жасау бойынша толық нұсқаулық.',
+        'guides.uploadMaterial.title': 'Курсқа оқу материалын жүктеу',
+        'guides.uploadMaterial.description': 'Жасалған курстарға әртүрлі оқу материалдарын қосу бойынша нұсқаулық.',
+        'guides.createNotification.title': 'Хабарландыру жасау',
+        'guides.createNotification.description': 'Оқу қатысушыларына хабарландыру жасау және жіберу нұсқаулығы.',
+        'guides.exportReport.title': 'Есепті шығару',
+        'guides.exportReport.description': 'Оқу прогресі туралы есептерді жасау және экспорттау бойынша қадамдық нұсқаулық.',
+        'guides.enrollParticipants.title': 'Тренингке қатысушыларды тіркеу',
+        'guides.enrollParticipants.description': 'Оқу курстары мен тренингтерге қатысушыларды қосу нұсқаулығы.',
+        'guides.manageGroups.title': 'Топтарды басқару',
+        'guides.manageGroups.description': 'Жүйеде оқу топтарын жасау және басқару нұсқаулығы.',
+        'guides.manageCourses.title': 'Курстарды басқару',
+        'guides.manageCourses.description': 'Оқу курстарын әкімшілендіру және баптау бойынша толық нұсқаулық.',
+        'guides.newReports.title': 'Жаңа есептемелер',
+        'guides.newReports.description': 'Жүйедегі жаңа есептеме және аналитика мүмкіндіктеріне шолу.',
+        'guides.certificates.title': 'Сертификаттар',
+        'guides.certificates.description': 'Оқуды аяқтау туралы сертификаттарды баптау және беру нұсқаулығы.',
+        'guides.faq.title': 'ЖҚС / Жиі қойылатын сұрақтар',
+        'guides.faq.description': 'Жүйені пайдалану бойынша ең жиі қойылатын сұрақтарға жауаптар.',
+        'tour.menuNavigation.title': 'Навигация мәзірі',
+        'tour.menuNavigation.description': 'Барлық қолжетімді нұсқаулықтар мен нұсқаулармен бүйірлік мәзірді ашу үшін осы түймені басыңыз.',
+        'tour.guidesList.title': 'Нұсқаулықтар тізімі',
+        'tour.guidesList.description': 'Мұнда категориялар бойынша бөлінген барлық қолжетімді нұсқаулықтар бар. Зерделеу үшін қажетті бөлімді таңдаңыз.',
+        'tour.guidesGrid.title': 'Нұсқаулықтар каталогы',
+        'guides.createNotification.subtitle': 'Хабарландыру жасау бойынша қадамдық нұсқаулық',
+        'tour.guidesGrid.description': 'Барлық қолжетімді нұсқаулықтар мен нұсқаулар карточкалар түрінде ұсынылған. Нұсқаулықты ашу үшін кез келген карточканы басыңыз.',
+        
+        // Footer translations
+        'footer.title': 'Оқыту орталығы',
+        'footer.subtitle': 'Air Astana JSC',
+        'footer.support': 'Қолдау',
+        'footer.contactLabel': 'Сұрақтар бойынша хабарласыңыз:',
+        'footer.quickLinks': 'Жылдам сілтемелер',
+        'footer.home': 'Басты бет',
+        'footer.browserLogin': 'Жүйеге кіру',
+        'footer.mobileApp': 'Мобильді қосымша',
+        'footer.copyright': '© 2024 Air Astana JSC. Барлық құқықтар қорғалған.',
+        'footer.version': 'Жүйе нұсқасы: 2.0'
+    }
+};
 
         // Language flags mapping
         const languageFlags = {
