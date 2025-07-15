@@ -1,3 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Центр обучения - Руководства и инструкции</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 50%, #bbdefb 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .menu-toggle {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            padding: 0.8rem;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+            position: relative;
+        }
+
+        .menu-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(25, 118, 210, 0.4);
+        }
+
+        .menu-toggle:active {
+            transform: translateY(0);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            width: 20px;
+            height: 14px;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            height: 2px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active .hamburger span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-toggle.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+        }
+
+        .language-toggle {
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border: 2px solid rgba(25, 118, 210, 0.2);
+            border-radius: 10px;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            color: #1976d2;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            justify-content: space-between;
+        }
+
+        .language-toggle:hover {
+            background: linear-gradient(135deg, #e8f4fd, #d1e9f8);
+            border-color: #1976d2;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+        }
+
+        .language-flag {
+            font-size: 1.2rem;
+        }
+
+        .language-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .language-toggle.active .language-arrow {
+            transform: rotate(180deg);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 2px solid rgba(25, 118, 210, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            min-width: 160px;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .language-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .language-option:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .language-option:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .language-option:hover {
+            background: linear-gradient(135deg, #e8f4fd, #d1e9f8);
+            color: #1976d2;
+        }
+
+        .language-option.selected {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            color: white;
+        }
+
+        .language-option.selected:hover {
+            background: linear-gradient(135deg, #1565c0, #0d47a1);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 1100;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(25, 118, 210, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-section-title {
+            padding: 0 1.5rem 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(25, 118, 210, 0.08);
+            border-left-color: #1976d2;
+            color: #1976d2;
+        }
+
+        .menu-item.active {
+            background-color: rgba(25, 118, 210, 0.12);
+            border-left-color: #1976d2;
+            color: #1976d2;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1050;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Tour Overlay */
+        .tour-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+        }
+
+        .tour-overlay.active {
+            display: block;
+        }
+
+        .tour-highlight {
+            position: absolute;
+            border: 3px solid #1976d2;
+            border-radius: 8px;
+            box-shadow: 0 0 0 5px rgba(25, 118, 210, 0.3);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .tour-dialog {
+            position: absolute;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            z-index: 2001;
+        }
+
+        .tour-dialog h3 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .tour-dialog p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .tour-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tour-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tour-btn-primary {
+            background: #1976d2;
+            color: white;
+        }
+
+        .tour-btn-primary:hover {
+            background: #1565c0;
+        }
+
+        .tour-btn-secondary {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .tour-btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .tour-progress {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2.5rem 1rem;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Home Page */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: start;
+        }
+
+        .guide-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(25, 118, 210, 0.15);
+            border-color: rgba(25, 118, 210, 0.2);
+        }
+
+        .guide-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .guide-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 1rem;
+        }
+
+        .guide-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: auto;
+        }
+
+        .guide-category {
+            background: rgba(25, 118, 210, 0.1);
+            color: #1976d2;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .guide-status {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .guide-status.viewed {
+            background: #4caf50;
+            color: white;
+        }
+
+        .guide-status.new {
+            background: #ff9800;
+            color: white;
+        }
+
+        /* Guide Page */
+        .guide-page {
+            display: none;
+        }
+
+        .guide-page.active {
+            display: block;
+        }
+
+        .guide-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .guide-header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-header p {
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(25, 118, 210, 0.3);
+        }
+
+        .back-button .icon {
+            margin-right: 0.5rem;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, #ffffff, #f8fbff);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #1976d2;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .contact-info p {
+            color: #1565c0;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .contact-email {
+            color: #0d47a1;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Welcome Dialog */
+        .welcome-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            z-index: 2001;
+            text-align: center;
+            display: none;
+        }
+
+        .welcome-dialog.active {
+            display: block;
+        }
+
+        .welcome-dialog h2 {
+            color: #1976d2;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .welcome-dialog p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .welcome-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                padding: 0 1rem;
+                flex-direction: row;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 280px;
+                left: -280px;
+            }
+
+            .tour-dialog {
+                max-width: 250px;
+            }
+
+            .welcome-buttons {
+                flex-direction: column;
+            }
+
+            .language-dropdown {
+                right: auto;
+                left: 0;
+            }
+        }
+    </style>
+</head>
 <body>
     <!-- Welcome Dialog -->
     <div class="tour-overlay" id="welcome-overlay">
@@ -1262,5 +1933,640 @@
         </div>
     </div>
 
+    
+
+        <!-- Остальные страницы гайдов... -->
     </main>
+
+    <script>
+        // Translations object
+        const translations = {
+            ru: {
+              'guides.createNotification.subtitle': 'Пошаговая инструкция по созданию уведомлений',
+                'site.title': 'Центр обучения',
+                'welcome.title': 'Добро пожаловать в Центр обучения!',
+                'welcome.description': 'Хотите ли вы ознакомиться с интерфейсом? Мы покажем вам основные элементы и функции системы.',
+                'welcome.startTour': 'Да, показать тур',
+                'welcome.skip': 'Пропустить',
+                'tour.prev': 'Назад',
+                'tour.next': 'Далее',
+                'tour.finish': 'Завершить',
+                'sidebar.title': 'Руководства',
+                'sidebar.subtitle': 'Выберите инструкцию',
+                'menu.main': 'Основное',
+                'menu.home': 'Главная',
+                'menu.gettingStarted': 'Начало работы',
+                'menu.browserLogin': 'Как войти в ЛМС через браузер',
+                'menu.mobileApp': 'Как установить мобильное приложение',
+                'menu.contentCreation': 'Создание контента',
+                'menu.createCourse': 'Как создать курс в LMS',
+                'menu.uploadMaterial': 'Как загрузить учебный материал',
+                'menu.createNotification': 'Как создать уведомление',
+                'menu.management': 'Управление',
+                'menu.enrollParticipants': 'Как зачислить участников',
+                'menu.manageGroups': 'Управление группами',
+                'menu.manageCourses': 'Управление курсами',
+                'menu.reporting': 'Отчетность',
+                'menu.exportReport': 'Как выгрузить отчет',
+                'menu.newReports': 'Новые отчеты',
+                'menu.certificates': 'Сертификаты',
+                'menu.faq': 'FAQ / Частые вопросы',
+                'hero.title': 'Добро пожаловать в LMS',
+                'hero.subtitle': 'Полные руководства по использованию системы управления обучением',
+                'status.new': 'Новый гайд',
+                'status.viewed': 'Просмотрено',
+                'categories.gettingStarted': 'Начало работы',
+                'categories.mobile': 'Мобильное',
+                'categories.content': 'Контент',
+                'categories.communications': 'Коммуникации',
+                'categories.reports': 'Отчеты',
+                'categories.management': 'Управление',
+                'categories.certification': 'Сертификация',
+                'categories.support': 'Поддержка',
+                'reading.time5': '5 мин чтения',
+                'reading.time8': '8 мин чтения',
+                'reading.time10': '10 мин чтения',
+                'reading.time12': '12 мин чтения',
+                'reading.time15': '15 мин чтения',
+                'reading.time18': '18 мин чтения',
+                'reading.time20': '20 мин чтения',
+                'reading.time25': '25 мин чтения',
+                'contact.question': 'По вопросам обращайтесь:',
+                'back.toList': 'Вернуться к списку',
+                'guides.browserLogin.title': 'Как войти в ЛМС через браузер с компьютера',
+                'guides.browserLogin.description': 'Пошаговая инструкция по входу в систему управления обучением через веб-браузер.',
+                'guides.browserLogin.subtitle': 'Пошаговая инструкция по входу в систему',
+                'guides.browserLogin.contentTitle': 'Вход в систему управления обучением',
+                'guides.browserLogin.content': 'Здесь будет размещен полный контент руководства по входу в ЛМС через браузер...',
+                'guides.mobileApp.title': 'Как установить мобильное приложение',
+                'guides.uploadMaterial.subtitle': 'Как правильно загружать материалы к учебному курсу',
+                'guides.mobileApp.description': 'Руководство по установке и настройке мобильного приложения LMS для Android и iOS.',
+                'guides.mobileApp.subtitle': 'Руководство по установке мобильного приложения',
+                'guides.mobileApp.contentTitle': 'Установка мобильного приложения',
+                'guides.mobileApp.content': 'Здесь будет размещен полный контент руководства по установке мобильного приложения...',
+                'guides.createCourse.title': 'Как создать курс в LMS',
+                'guides.createCourse.description': 'Детальное руководство по созданию учебного курса в системе управления обучением.',
+                'guides.uploadMaterial.title': 'Как загрузить учебный материал в курс',
+                'guides.uploadMaterial.description': 'Инструкция по добавлению различных типов учебных материалов в созданные курсы.',
+                'guides.createNotification.title': 'Как создать уведомление',
+                'guides.createNotification.description': 'Руководство по созданию и отправке уведомлений участникам обучения.',
+                'guides.exportReport.title': 'Как выгрузить отчет',
+                'guides.exportReport.description': 'Пошаговая инструкция по созданию и экспорту отчетов о прогрессе обучения.',
+                'guides.enrollParticipants.title': 'Как зачислить участников на тренинг',
+                'guides.enrollParticipants.description': 'Руководство по добавлению участников на учебные курсы и тренинги.',
+                'guides.manageGroups.title': 'Управление группами',
+                'guides.manageGroups.description': 'Инструкция по созданию и управлению учебными группами в системе.',
+                'guides.manageCourses.title': 'Управление курсами',
+                'guides.manageCourses.description': 'Полное руководство по администрированию и настройке учебных курсов.',
+                'guides.newReports.title': 'Новые отчеты',
+                'guides.newReports.description': 'Обзор новых возможностей отчетности и аналитики в системе.',
+                'guides.certificates.title': 'Сертификаты',
+                'guides.certificates.description': 'Руководство по настройке и выдаче сертификатов об окончании обучения.',
+                'guides.faq.title': 'FAQ / Частые вопросы',
+                'guides.faq.description': 'Ответы на наиболее часто задаваемые вопросы по использованию системы.',
+                'tour.menuNavigation.title': 'Меню навигации',
+                'tour.menuNavigation.description': 'Нажмите на эту кнопку, чтобы открыть боковое меню со всеми доступными руководствами и инструкциями.',
+                'tour.guidesList.title': 'Список руководств',
+                'tour.guidesList.description': 'Здесь находятся все доступные руководства, разделенные по категориям. Выберите нужный раздел для изучения.',
+                'tour.guidesGrid.title': 'Каталог руководств',
+                'tour.guidesGrid.description': 'Все доступные руководства и инструкции представлены в виде карточек. Нажмите на любую карточку, чтобы открыть руководство.'
+            },
+            en: {
+                'site.title': 'Learning Center',
+                'welcome.title': 'Welcome to the Learning Center!',
+                'welcome.description': 'Would you like to familiarize yourself with the interface? We will show you the main elements and functions of the system.',
+                'welcome.startTour': 'Yes, show tour',
+                'welcome.skip': 'Skip',
+                'tour.prev': 'Back',
+                'tour.next': 'Next',
+                'tour.finish': 'Finish',
+                'sidebar.title': 'Guides',
+                'sidebar.subtitle': 'Select an instruction',
+                'menu.main': 'Main',
+                'menu.home': 'Home',
+                'menu.gettingStarted': 'Getting Started',
+                'menu.browserLogin': 'How to login to LMS via browser',
+                'menu.mobileApp': 'How to install mobile app',
+                'menu.contentCreation': 'Content Creation',
+                'menu.createCourse': 'How to create a course in LMS',
+                'menu.uploadMaterial': 'How to upload learning material',
+                'menu.createNotification': 'How to create a notification',
+                'menu.management': 'Management',
+                'menu.enrollParticipants': 'How to enroll participants',
+                'menu.manageGroups': 'Group management',
+                'menu.manageCourses': 'Course management',
+                'menu.reporting': 'Reporting',
+                'menu.exportReport': 'How to export report',
+                'menu.newReports': 'New reports',
+                'menu.certificates': 'Certificates',
+                'menu.faq': 'FAQ / Frequently asked questions',
+                'hero.title': 'Welcome to LMS',
+                'hero.subtitle': 'Complete guides for using the learning management system',
+                'status.new': 'New guide',
+                'status.viewed': 'Viewed',
+                'categories.gettingStarted': 'Getting Started',
+                'categories.mobile': 'Mobile',
+                'categories.content': 'Content',
+                'categories.communications': 'Communications',
+                'categories.reports': 'Reports',
+                'categories.management': 'Management',
+                'categories.certification': 'Certification',
+                'categories.support': 'Support',
+                'reading.time5': '5 min read',
+                'reading.time8': '8 min read',
+                'reading.time10': '10 min read',
+                'reading.time12': '12 min read',
+                'reading.time15': '15 min read',
+                'reading.time18': '18 min read',
+                'reading.time20': '20 min read',
+                'reading.time25': '25 min read',
+                'contact.question': 'For questions, contact:',
+                'back.toList': 'Back to list',
+                'guides.browserLogin.title': 'How to login to LMS via browser from computer',
+                'guides.browserLogin.description': 'Step-by-step instructions for logging into the learning management system via web browser.',
+                'guides.browserLogin.subtitle': 'Step-by-step instructions for system login',
+                'guides.browserLogin.contentTitle': 'Login to learning management system',
+                'guides.browserLogin.content': 'Full content guide for logging into LMS via browser will be placed here...',
+                'guides.mobileApp.title': 'How to install mobile application',
+                'guides.mobileApp.description': 'Guide for installing and configuring LMS mobile application for Android and iOS.',
+                'guides.mobileApp.subtitle': 'Mobile application installation guide',
+                'guides.mobileApp.contentTitle': 'Mobile application installation',
+                'guides.mobileApp.content': 'Full content guide for mobile application installation will be placed here...',
+                'guides.createCourse.title': 'How to create a course in LMS',
+                'guides.uploadMaterial.subtitle': 'How to upload files to the course',
+                'guides.createCourse.description': 'Detailed guide for creating an educational course in the learning management system.',
+                'guides.uploadMaterial.title': 'How to upload learning material to course',
+                'guides.uploadMaterial.description': 'Instructions for adding various types of learning materials to created courses.',
+                'guides.createNotification.title': 'How to create a notification',
+                'guides.createNotification.description': 'Guide for creating and sending notifications to learning participants.',
+                'guides.exportReport.title': 'How to export report',
+                'guides.exportReport.description': 'Step-by-step instructions for creating and exporting learning progress reports.',
+                'guides.enrollParticipants.title': 'How to enroll participants in training',
+                'guides.enrollParticipants.description': 'Guide for adding participants to educational courses and trainings.',
+                'guides.manageGroups.title': 'Group management',
+                'guides.manageGroups.description': 'Instructions for creating and managing learning groups in the system.',
+                'guides.manageCourses.title': 'Course management',
+                'guides.manageCourses.description': 'Complete guide for administering and configuring educational courses.',
+                'guides.newReports.title': 'New reports',
+                'guides.newReports.description': 'Overview of new reporting and analytics capabilities in the system.',
+                'guides.certificates.title': 'Certificates',
+                'guides.certificates.description': 'Guide for setting up and issuing completion certificates.',
+                'guides.faq.title': 'FAQ / Frequently asked questions',
+                'guides.faq.description': 'Answers to the most frequently asked questions about using the system.',
+                'tour.menuNavigation.title': 'Navigation menu',
+                'tour.menuNavigation.description': 'Click this button to open the side menu with all available guides and instructions.',
+                'tour.guidesList.title': 'Guides list',
+                'tour.guidesList.description': 'Here are all available guides, divided by categories. Select the section you need to study.',
+                'guides.createNotification.subtitle': 'Step-by-step guide to creating notifications',
+                'tour.guidesGrid.title': 'Guides catalog',
+                'tour.guidesGrid.description': 'All available guides and instructions are presented as cards. Click on any card to open the guide.'
+            },
+            kk: {
+                'site.title': 'Оқыту орталығы',
+                'welcome.title': 'Оқыту орталығына қош келдіңіз!',
+                'welcome.description': 'Интерфейспен танысуды қалайсыз ба? Біз сізге жүйенің негізгі элементтері мен функцияларын көрсетеміз.',
+                'welcome.startTour': 'Иә, турды көрсету',
+                'welcome.skip': 'Өткізу',
+                'tour.prev': 'Артқа',
+                'tour.next': 'Келесі',
+                'tour.finish': 'Аяқтау',
+                'sidebar.title': 'Нұсқаулықтар',
+                'sidebar.subtitle': 'Нұсқаулықты таңдаңыз',
+                'menu.main': 'Негізгі',
+                'menu.home': 'Басты бет',
+                'menu.gettingStarted': 'Жұмысты бастау',
+                'menu.browserLogin': 'Браузер арқылы ЛМЖ-ға кіру',
+                'menu.mobileApp': 'Мобильді қосымшаны орнату',
+                'menu.contentCreation': 'Мазмұн жасау',
+                'menu.createCourse': 'ЛМЖ-да курс жасау',
+                'menu.uploadMaterial': 'Оқу материалын жүктеу',
+                'menu.createNotification': 'Хабарландыру жасау',
+                'menu.management': 'Басқару',
+                'menu.enrollParticipants': 'Қатысушыларды тіркеу',
+                'menu.manageGroups': 'Топтарды басқару',
+                'menu.manageCourses': 'Курстарды басқару',
+                'menu.reporting': 'Есептеме',
+                'menu.exportReport': 'Есепті шығару',
+                'menu.newReports': 'Жаңа есептемелер',
+                'menu.certificates': 'Сертификаттар',
+                'menu.faq': 'ЖҚС / Жиі қойылатын сұрақтар',
+                'hero.title': 'ЛМЖ-ға қош келдіңіз',
+                'hero.subtitle': 'Оқуды басқару жүйесін пайдалану бойынша толық нұсқаулықтар',
+                'status.new': 'Жаңа нұсқаулық',
+                'status.viewed': 'Қаралды',
+                'categories.gettingStarted': 'Жұмысты бастау',
+                'categories.mobile': 'Мобильді',
+                'categories.content': 'Мазмұн',
+                'categories.communications': 'Байланыс',
+                'categories.reports': 'Есептемелер',
+                'categories.management': 'Басқару',
+                'categories.certification': 'Сертификаттау',
+                'categories.support': 'Қолдау',
+                'reading.time5': '5 мин оқу',
+                'reading.time8': '8 мин оқу',
+                'reading.time10': '10 мин оқу',
+                'reading.time12': '12 мин оқу',
+                'reading.time15': '15 мин оқу',
+                'reading.time18': '18 мин оқу',
+                'reading.time20': '20 мин оқу',
+                'reading.time25': '25 мин оқу',
+                'contact.question': 'Сұрақтар бойынша хабарласыңыз:',
+                'back.toList': 'Тізімге оралу',
+                'guides.browserLogin.title': 'Компьютердің браузері арқылы ЛМЖ-ға кіру',
+                'guides.browserLogin.description': 'Веб-браузер арқылы оқуды басқару жүйесіне кіру бойынша қадамдық нұсқаулық.',
+                'guides.browserLogin.subtitle': 'Жүйеге кіру бойынша қадамдық нұсқаулық',
+                'guides.browserLogin.contentTitle': 'Оқуды басқару жүйесіне кіру',
+                'guides.browserLogin.content': 'Браузер арқылы ЛМЖ-ға кіру бойынша толық мазмұн нұсқаулығы мұнда орналастырылады...',
+                'guides.mobileApp.title': 'Мобильді қосымшаны орнату',
+                'guides.mobileApp.description': 'Android және iOS үшін ЛМЖ мобильді қосымшасын орнату және баптау нұсқаулығы.',
+                'guides.mobileApp.subtitle': 'Мобильді қосымшаны орнату нұсқаулығы',
+                'guides.mobileApp.contentTitle': 'Мобильді қосымшаны орнату',
+                'guides.mobileApp.content': 'Мобильді қосымшаны орнату бойынша толық мазмұн нұсқаулығы мұнда орналастырылады...',
+                'guides.createCourse.title': 'ЛМЖ-да курс жасау',
+                'guides.uploadMaterial.subtitle': 'ЛМЖ-ға оқу материалдарды еңгізу',
+                'guides.createCourse.description': 'Оқуды басқару жүйесінде оқу курсын жасау бойынша толық нұсқаулық.',
+                'guides.uploadMaterial.title': 'Курсқа оқу материалын жүктеу',
+                'guides.uploadMaterial.description': 'Жасалған курстарға әртүрлі оқу материалдарын қосу бойынша нұсқаулық.',
+                'guides.createNotification.title': 'Хабарландыру жасау',
+                'guides.createNotification.description': 'Оқу қатысушыларына хабарландыру жасау және жіберу нұсқаулығы.',
+                'guides.exportReport.title': 'Есепті шығару',
+                'guides.exportReport.description': 'Оқу прогресі туралы есептерді жасау және экспорттау бойынша қадамдық нұсқаулық.',
+                'guides.enrollParticipants.title': 'Тренингке қатысушыларды тіркеу',
+                'guides.enrollParticipants.description': 'Оқу курстары мен тренингтерге қатысушыларды қосу нұсқаулығы.',
+                'guides.manageGroups.title': 'Топтарды басқару',
+                'guides.manageGroups.description': 'Жүйеде оқу топтарын жасау және басқару нұсқаулығы.',
+                'guides.manageCourses.title': 'Курстарды басқару',
+                'guides.manageCourses.description': 'Оқу курстарын әкімшілендіру және баптау бойынша толық нұсқаулық.',
+                'guides.newReports.title': 'Жаңа есептемелер',
+                'guides.newReports.description': 'Жүйедегі жаңа есептеме және аналитика мүмкіндіктеріне шолу.',
+                'guides.certificates.title': 'Сертификаттар',
+                'guides.certificates.description': 'Оқуды аяқтау туралы сертификаттарды баптау және беру нұсқаулығы.',
+                'guides.faq.title': 'ЖҚС / Жиі қойылатын сұрақтар',
+                'guides.faq.description': 'Жүйені пайдалану бойынша ең жиі қойылатын сұрақтарға жауаптар.',
+                'tour.menuNavigation.title': 'Навигация мәзірі',
+                'tour.menuNavigation.description': 'Барлық қолжетімді нұсқаулықтар мен нұсқаулармен бүйірлік мәзірді ашу үшін осы түймені басыңыз.',
+                'tour.guidesList.title': 'Нұсқаулықтар тізімі',
+                'tour.guidesList.description': 'Мұнда категориялар бойынша бөлінген барлық қолжетімді нұсқаулықтар бар. Зерделеу үшін қажетті бөлімді таңдаңыз.',
+                'tour.guidesGrid.title': 'Нұсқаулықтар каталогы',
+                'guides.createNotification.subtitle': 'Хабарландыру жасау бойынша қадамдық нұсқаулық',
+                'tour.guidesGrid.description': 'Барлық қолжетімді нұсқаулықтар мен нұсқаулар карточкалар түрінде ұсынылған. Нұсқаулықты ашу үшін кез келген карточканы басыңыз.'
+            }
+        };
+
+        // Language flags mapping
+        const languageFlags = {
+            'ru': '🇷🇺',
+            'en': '🇺🇸',
+            'kk': '🇰🇿'
+        };
+
+        const languageCodes = {
+            'ru': 'RU',
+            'en': 'EN',
+            'kk': 'KK'
+        };
+
+        // Current language
+        let currentLanguage = localStorage.getItem('selectedLanguage') || 'ru';
+
+        // Tour data with translations
+        const tourSteps = [
+            {
+                element: 'menu-toggle',
+                titleKey: 'tour.menuNavigation.title',
+                descriptionKey: 'tour.menuNavigation.description',
+                position: 'bottom',
+                action: 'openSidebar'
+            },
+            {
+                element: 'sidebar-menu',
+                titleKey: 'tour.guidesList.title',
+                descriptionKey: 'tour.guidesList.description',
+                position: 'right'
+            },
+            {
+                element: 'guides-grid',
+                titleKey: 'tour.guidesGrid.title',
+                descriptionKey: 'tour.guidesGrid.description',
+                position: 'top',
+                action: 'closeSidebar'
+            }
+        ];
+
+        let currentTourStep = 0;
+        let tourActive = false;
+        let viewedGuides = JSON.parse(localStorage.getItem('viewedGuides')) || [];
+
+        // Translation function
+        function t(key) {
+            return translations[currentLanguage]?.[key] || translations['ru'][key] || key;
+        }
+
+        // Update all translations on page
+        function updatePageTranslations() {
+            // Update elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                element.textContent = t(key);
+            });
+
+            // Update elements with data-translate-title attribute
+            document.querySelectorAll('[data-translate-title]').forEach(element => {
+                const key = element.getAttribute('data-translate-title');
+                element.setAttribute('title', t(key));
+            });
+
+            // Update document title
+            document.title = t('site.title') + ' - Руководства и инструкции';
+
+            // Update html lang attribute
+            document.documentElement.lang = currentLanguage;
+
+            // Update tour next button text
+            const tourNextBtn = document.getElementById('tour-next');
+            if (tourNextBtn && currentTourStep === tourSteps.length - 1) {
+                tourNextBtn.textContent = t('tour.finish');
+            }
+        }
+
+        // Language selector functions
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            const toggle = document.getElementById('language-toggle');
+            dropdown.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('selectedLanguage', lang);
+            
+            // Update current language display
+            document.getElementById('current-flag').textContent = languageFlags[lang];
+            document.getElementById('current-lang').textContent = languageCodes[lang];
+            
+            // Update dropdown selection
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('selected');
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Close dropdown
+            document.getElementById('language-dropdown').classList.remove('active');
+            document.getElementById('language-toggle').classList.remove('active');
+            
+            // Update all translations
+            updatePageTranslations();
+            
+            // Update guide status
+            updateGuideStatus();
+        }
+
+        // Close language dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const languageSelector = document.querySelector('.language-selector');
+            if (!languageSelector.contains(e.target)) {
+                document.getElementById('language-dropdown').classList.remove('active');
+                document.getElementById('language-toggle').classList.remove('active');
+            }
+        });
+
+        // Update guide status icons
+        function updateGuideStatus() {
+            document.querySelectorAll('.guide-card').forEach(card => {
+                const guideId = card.getAttribute('data-guide');
+                const statusIcon = card.querySelector('.guide-status');
+                
+                if (viewedGuides.includes(guideId)) {
+                    statusIcon.classList.remove('new');
+                    statusIcon.classList.add('viewed');
+                    statusIcon.textContent = '✓';
+                    statusIcon.title = t('status.viewed');
+                } else {
+                    statusIcon.classList.remove('viewed');
+                    statusIcon.classList.add('new');
+                    statusIcon.textContent = '●';
+                    statusIcon.title = t('status.new');
+                }
+            });
+        }
+
+        // Check if user has seen the tour
+        function checkFirstVisit() {
+            const hasSeenTour = localStorage.getItem('hasSeenTour');
+            if (!hasSeenTour) {
+                setTimeout(() => {
+                    document.getElementById('welcome-overlay').style.display = 'block';
+                }, 1000);
+            }
+        }
+
+        function startTour() {
+            localStorage.setItem('hasSeenTour', 'true');
+            document.getElementById('welcome-overlay').style.display = 'none';
+            document.getElementById('tour-overlay').classList.add('active');
+            tourActive = true;
+            currentTourStep = 0;
+            showTourStep();
+        }
+
+        function skipTour() {
+            localStorage.setItem('hasSeenTour', 'true');
+            document.getElementById('welcome-overlay').style.display = 'none';
+        }
+
+        function showTourStep() {
+            if (currentTourStep >= tourSteps.length) {
+                endTour();
+                return;
+            }
+
+            const step = tourSteps[currentTourStep];
+            
+            // Execute step action before showing
+            if (step.action === 'openSidebar') {
+                toggleSidebar();
+            } else if (step.action === 'closeSidebar') {
+                closeSidebar();
+            }
+
+            // Wait a bit for animation to complete
+            setTimeout(() => {
+                const element = document.getElementById(step.element);
+                const highlight = document.getElementById('tour-highlight');
+                const dialog = document.getElementById('tour-dialog');
+
+                if (!element) {
+                    nextTourStep();
+                    return;
+                }
+
+                // Position highlight
+                const rect = element.getBoundingClientRect();
+                highlight.style.left = (rect.left - 5) + 'px';
+                highlight.style.top = (rect.top - 5) + 'px';
+                highlight.style.width = (rect.width + 10) + 'px';
+                highlight.style.height = (rect.height + 10) + 'px';
+
+                // Position dialog
+                let dialogTop, dialogLeft;
+                if (step.position === 'bottom') {
+                    dialogTop = rect.bottom + 20;
+                    dialogLeft = rect.left;
+                } else if (step.position === 'right') {
+                    dialogTop = rect.top;
+                    dialogLeft = rect.right + 20;
+                } else {
+                    dialogTop = rect.top - 180;
+                    dialogLeft = rect.left;
+                }
+
+                // Ensure dialog stays within viewport
+                if (dialogLeft + 300 > window.innerWidth) {
+                    dialogLeft = window.innerWidth - 320;
+                }
+                if (dialogLeft < 20) {
+                    dialogLeft = 20;
+                }
+                if (dialogTop < 20) {
+                    dialogTop = rect.bottom + 20;
+                }
+
+                dialog.style.left = dialogLeft + 'px';
+                dialog.style.top = dialogTop + 'px';
+
+                // Update dialog content with translations
+                document.getElementById('tour-title').textContent = t(step.titleKey);
+                document.getElementById('tour-description').textContent = t(step.descriptionKey);
+                document.getElementById('tour-progress').textContent = `${currentTourStep + 1} из ${tourSteps.length}`;
+
+                // Update buttons
+                document.getElementById('tour-prev').style.display = currentTourStep === 0 ? 'none' : 'inline-block';
+                const nextBtn = document.getElementById('tour-next');
+                nextBtn.textContent = currentTourStep === tourSteps.length - 1 ? t('tour.finish') : t('tour.next');
+            }, step.action ? 300 : 0);
+        }
+
+        function nextTourStep() {
+            currentTourStep++;
+            showTourStep();
+        }
+
+        function prevTourStep() {
+            if (currentTourStep > 0) {
+                currentTourStep--;
+                showTourStep();
+            }
+        }
+
+        function endTour() {
+            document.getElementById('tour-overlay').classList.remove('active');
+            closeSidebar();
+            tourActive = false;
+        }
+
+        // Existing functions
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+
+        function showHome() {
+            document.querySelectorAll('.guide-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById('home-page').style.display = 'block';
+            
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('.menu-item[onclick="showHome()"]').classList.add('active');
+            
+            closeSidebar();
+        }
+
+        function showGuide(guideId) {
+            // Mark guide as viewed
+            if (!viewedGuides.includes(guideId)) {
+                viewedGuides.push(guideId);
+                localStorage.setItem('viewedGuides', JSON.stringify(viewedGuides));
+                updateGuideStatus();
+            }
+
+            document.getElementById('home-page').style.display = 'none';
+            
+            document.querySelectorAll('.guide-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const guidePage = document.getElementById(guideId + '-page');
+            if (guidePage) {
+                guidePage.classList.add('active');
+            }
+            
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            const menuItem = document.querySelector(`.menu-item[onclick="showGuide('${guideId}')"]`);
+            if (menuItem) {
+                menuItem.classList.add('active');
+            }
+            
+            closeSidebar();
+        }
+
+        // Close tour on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && tourActive) {
+                endTour();
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage(currentLanguage);
+            updateGuideStatus();
+            checkFirstVisit();
+        });
+
+        // Close sidebar when clicking on a menu item on mobile
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+            if (tourActive) {
+                showTourStep();
+            }
+        });
+    </script>
 </body>
+</html>
+
